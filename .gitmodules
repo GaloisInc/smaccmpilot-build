@@ -1,0 +1,12 @@
+[submodule "smaccmpilot-stm32f4"]
+	path = smaccmpilot-stm32f4
+	url = https://github.com/GaloisInc/smaccmpilot-stm32f4
+[submodule "ivory"]
+	path = ivory
+	url = https://github.com/GaloisInc/ivory.git
+[submodule "tower"]
+	path = tower
+	url = https://github.com/GaloisInc/tower.git
+[submodule "ardupilot"]
+	path = ardupilot
+	url = https://github.com/GaloisInc/ardupilot.git

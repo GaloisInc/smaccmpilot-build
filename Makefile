@@ -1,5 +1,5 @@
 
-CABAL         := cabal-dev -s $(CURDIR)/cabal-dev
+CABAL         := cabal-dev
 CABAL_INSTALL := $(CABAL) install --force-reinstalls
 
 IVORY_TARGETS := \

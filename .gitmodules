@@ -10,3 +10,6 @@
 [submodule "ardupilot"]
 	path = ardupilot
 	url = https://github.com/GaloisInc/ardupilot.git
+[submodule "ivory-rtverification"]
+	path = ivory-rtverification
+	url = https://github.com/GaloisInc/ivory-rtverification.git

@@ -1,4 +1,3 @@
-
 CABAL         := cabal-dev
 CABAL_INSTALL := $(CABAL) install --force-reinstalls
 
@@ -21,7 +20,7 @@ TOWER_SUBMODULE := ./tower
 
 SMACCMPILOT_TARGETS := \
 	smaccmpilot/ivory-bsp-stm32f4 \
-	smaccmpilot/ivory-bsp-hwf4wrapper \
+	smaccmpilot/ivory-hwf4wrapper \
 	smaccmpilot/ivory \
 	smaccmpilot/mavlink
 
@@ -70,17 +69,17 @@ tower/ivory-tower-freertos: $(IVORY_TARGETS) tower/ivory-tower
 	$(CABAL_INSTALL) $(TOWER_SUBMODULE)/ivory-tower-freertos
 
 smaccmpilot/ivory: $(IVORY_TARGETS) $(TOWER_TARGETS)
-smaccmpilot/ivory: smaccmpilot/mavlink smaccmpilot/ivory-bsp-hwf4wrapper
+smaccmpilot/ivory: smaccmpilot/mavlink smaccmpilot/ivory-hwf4wrapper
 	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/flight
 
 smaccmpilot/mavlink: $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/smaccm-mavlink
 
 smaccmpilot/ivory-bsp-stm32f4: $(IVORY_TARGETS) $(TOWER_TARGETS)
-	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/bsp/ivory/ivory-bsp-stm32f4
+	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/ivory-bsp-stm32f4
 
-smaccmpilot/ivory-bsp-hwf4wrapper: $(IVORY_TARGETS)
-	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/bsp/ivory/ivory-bsp-hwf4wrapper
+smaccmpilot/ivory-hwf4wrapper: $(IVORY_TARGETS)
+	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/ivory-hwf4wrapper
 
 ivory-rtv/rtv-lib: $(IVORY_TARGETS) $(RTV_PLUGIN_BUILD)
 	$(CABAL_INSTALL) $(IVORY_RTV_SUBMODULE)/rtv-lib

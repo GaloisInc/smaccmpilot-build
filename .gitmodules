@@ -12,7 +12,7 @@
 	url = git@github.com:GaloisInc/ardupilot.git
 [submodule "ivory-rtverification"]
 	path = ivory-rtverification
-	url = https://github.com/GaloisInc/ivory-rtverification.git
+	url = git@github.com:GaloisInc/ivory-rtverification.git
 [submodule "simple-spreadsheet-tools"]
 	path = simple-spreadsheet-tools
 	url = git@github.com:leepike/simple-spreadsheet-tools.git

@@ -1,21 +1,21 @@
 [submodule "smaccmpilot-stm32f4"]
 	path = smaccmpilot-stm32f4
-	url = https://github.com/GaloisInc/smaccmpilot-stm32f4
+	url = git@github.com:GaloisInc/smaccmpilot-stm32f4
 [submodule "ivory"]
 	path = ivory
-	url = https://github.com/GaloisInc/ivory.git
+	url = git@github.com:GaloisInc/ivory.git
 [submodule "tower"]
 	path = tower
-	url = https://github.com/GaloisInc/tower.git
+	url = git@github.com:GaloisInc/tower.git
 [submodule "ardupilot"]
 	path = ardupilot
-	url = https://github.com/GaloisInc/ardupilot.git
+	url = git@github.com:GaloisInc/ardupilot.git
 [submodule "ivory-rtverification"]
 	path = ivory-rtverification
 	url = https://github.com/GaloisInc/ivory-rtverification.git
 [submodule "simple-spreadsheet-tools"]
 	path = simple-spreadsheet-tools
-	url = git://github.com/leepike/simple-spreadsheet-tools.git
+	url = git@github.com:leepike/simple-spreadsheet-tools.git
 [submodule "cbmc-reporter"]
 	path = cbmc-reporter
 	url = git@github.com:GaloisInc/cbmc-reporter.git

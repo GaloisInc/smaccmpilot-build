@@ -1,21 +1,30 @@
 CABAL         := cabal-dev
 CABAL_INSTALL := $(CABAL) install --force-reinstalls
 
-IVORY_TARGETS := \
-	ivory/ivory \
-	ivory/ivory-opt \
-	ivory/ivory-stdlib \
-	ivory/ivory-backend-c \
-	ivory/ivory-examples \
-	ivory/ivory-bitdata \
-	ivory/ivory-hw
+# For faster builds when the Ivory/Tower compiler infrastructure has not been
+# modified.  Use, e.g.,
+#
+#    make COMPILER=0
+#
+ifeq ($(COMPILER),0)
+  IVORY_TARGETS :=
+  TOWER_TARGETS :=
+else
+  IVORY_TARGETS := \
+		ivory/ivory \
+		ivory/ivory-opt \
+		ivory/ivory-stdlib \
+		ivory/ivory-backend-c \
+		ivory/ivory-examples \
+		ivory/ivory-bitdata \
+		ivory/ivory-hw
+
+	TOWER_TARGETS := \
+		tower/ivory-tower \
+		tower/ivory-tower-freertos
+endif
 
 IVORY_SUBMODULE := ./ivory
-
-TOWER_TARGETS := \
-	tower/ivory-tower \
-	tower/ivory-tower-freertos
-
 TOWER_SUBMODULE := ./tower
 
 SMACCMPILOT_TARGETS := \
@@ -38,8 +47,6 @@ RTV_TARGETS := ivory-rtv/rtv-lib \
 .PHONY: ivory-rtv/rtv-lib smaccmpilot/sample-rtv-task
 
 all: $(SMACCMPILOT_TARGETS) $(TOWER_TARGETS) $(IVORY_TARGETS)
-
-ivory: $(IVORY_TARGETS)
 
 ivory/ivory:
 	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory

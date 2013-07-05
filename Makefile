@@ -24,18 +24,17 @@ else
 		tower/ivory-tower-freertos
 endif
 
-IVORY_SUBMODULE := ./ivory
-TOWER_SUBMODULE := ./tower
-
 SMACCMPILOT_TARGETS := \
 	smaccmpilot/ivory-bsp-stm32f4 \
 	smaccmpilot/ivory-hwf4wrapper \
 	smaccmpilot/ivory \
 	smaccmpilot/mavlink
 
-SMACCMPILOT_SUBMODULE := ./smaccmpilot-stm32f4
+IVORY_SUBMODULE					:= ./ivory
+TOWER_SUBMODULE					:= ./tower
+SMACCMPILOT_SUBMODULE		:= ./smaccmpilot-stm32f4
+IVORY_RTV_SUBMODULE			:= ./ivory-rtverification
 
-IVORY_RTV_SUBMODULE := ./ivory-rtverification
 RTV_PLUGIN := instrument_plugin.so
 RTV_PLUGIN_DIR := $(IVORY_RTV_SUBMODULE)/gcc-plugin
 RTV_PLUGIN_BUILD := $(SMACCMPILOT_SUBMODULE)/gcc-plugin/$(RTV_PLUGIN)
@@ -44,10 +43,12 @@ RTV_TARGETS := ivory-rtv/rtv-lib \
 	smaccmpilot/sample-rtv-task
 
 .PHONY: all $(IVORY_TARGETS) $(TOWER_TARGETS) $(SMACCMPILOT_TARGETS)
-.PHONY: ivory-rtv/rtv-lib smaccmpilot/sample-rtv-task
+.PHONY: ivory-rtv/rtv-lib smaccmpilot/sample-rtv-task cbmc-reporter
 
-all: $(SMACCMPILOT_TARGETS) $(TOWER_TARGETS) $(IVORY_TARGETS)
+all: $(SMACCMPILOT_TARGETS) $(TOWER_TARGETS) $(IVORY_TARGETS) cbmc-reporter
 
+################################################################################
+# Ivory
 ivory/ivory:
 	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory
 
@@ -69,12 +70,24 @@ ivory/ivory-bitdata: ivory/ivory-backend-c
 ivory/ivory-hw: ivory/ivory-bitdata
 	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory-hw
 
+################################################################################
+# Tower
 tower/ivory-tower: $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $(TOWER_SUBMODULE)/ivory-tower
 
 tower/ivory-tower-freertos: $(IVORY_TARGETS) tower/ivory-tower
 	$(CABAL_INSTALL) $(TOWER_SUBMODULE)/ivory-tower-freertos
 
+################################################################################
+# Model-checking
+spreadsheet:
+	$(CABAL_INSTALL) ./simple-spreadsheet-tools
+
+cbmc-reporter: spreadsheet
+	$(CABAL_INSTALL) ./cbmc-reporter
+
+################################################################################
+# SMACCMPilot
 smaccmpilot/ivory: $(IVORY_TARGETS) $(TOWER_TARGETS)
 smaccmpilot/ivory: smaccmpilot/mavlink smaccmpilot/ivory-hwf4wrapper
 	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/flight
@@ -88,20 +101,12 @@ smaccmpilot/ivory-bsp-stm32f4: $(IVORY_TARGETS) $(TOWER_TARGETS)
 smaccmpilot/ivory-hwf4wrapper: $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/ivory-hwf4wrapper
 
-ivory-rtv/rtv-lib: $(IVORY_TARGETS) $(RTV_PLUGIN_BUILD)
-	$(CABAL_INSTALL) $(IVORY_RTV_SUBMODULE)/rtv-lib
-
-$(RTV_PLUGIN_BUILD):
-	# We'll make a 32-bit version.  Use -e to pass the variable in the
-	#   # environment.
-	$(MAKE) -C $(RTV_PLUGIN_DIR) EXPLICIT32=1
-	mkdir -p $(SMACCMPILOT_SUBMODULE)/gcc-plugin
-	mv $(IVORY_RTV_SUBMODULE)/gcc-plugin/$(PLUGIN) $@
-
 smaccmpilot/sample-rtv-task: $(IVORY_TARGETS) $(TOWER_TARGETS)
 smaccmpilot/sample-rtv-task: ivory-rtv/rtv-lib
 	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/apps/sample-rtv-task
 
+################################################################################
+# Clean
 .PHONY: clean
 clean:
 	rm -rf ./cabal-dev

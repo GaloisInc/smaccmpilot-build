@@ -1,6 +1,17 @@
 CABAL         := cabal-dev
 CABAL_INSTALL := $(CABAL) install --force-reinstalls
 
+################################################################################
+# Project directories
+IVORY_MODULE					:= ivory
+TOWER_MODULE					:= tower
+SMACCMPILOT_MODULE		:= smaccmpilot-stm32f4
+RTV_MODULE		      	:= ivory-rtverification
+RTV_TASK                := $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
+
+################################################################################
+# Target summaries
+
 # For faster builds when the Ivory/Tower compiler infrastructure has not been
 # modified.  Use, e.g.,
 #
@@ -11,72 +22,86 @@ ifeq ($(COMPILER),0)
   TOWER_TARGETS :=
 else
   IVORY_TARGETS := \
-		ivory/ivory \
-		ivory/ivory-opt \
-		ivory/ivory-stdlib \
-		ivory/ivory-backend-c \
-		ivory/ivory-examples \
-		ivory/ivory-bitdata \
-		ivory/ivory-hw
+		$(IVORY_MODULE)/ivory \
+		$(IVORY_MODULE)/ivory-opt \
+		$(IVORY_MODULE)/ivory-stdlib \
+		$(IVORY_MODULE)/ivory-backend-c \
+		$(IVORY_MODULE)/ivory-examples \
+		$(IVORY_MODULE)/ivory-bitdata \
+		$(IVORY_MODULE)/ivory-hw
 
 	TOWER_TARGETS := \
-		tower/ivory-tower \
-		tower/ivory-tower-freertos
+		$(TOWER_MODULE)/ivory-tower \
+		$(TOWER_MODULE)/ivory-tower-freertos
 endif
 
 SMACCMPILOT_TARGETS := \
-	smaccmpilot/ivory-bsp-stm32f4 \
-	smaccmpilot/ivory-hwf4wrapper \
-	smaccmpilot/ivory \
-	smaccmpilot/mavlink
+	$(SMACCMPILOT_MODULE)/ivory-bsp-stm32f4 \
+	$(SMACCMPILOT_MODULE)/ivory-hwf4wrapper \
+	$(SMACCMPILOT_MODULE)/src/flight \
+	$(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 
-IVORY_SUBMODULE					:= ./ivory
-TOWER_SUBMODULE					:= ./tower
-SMACCMPILOT_SUBMODULE		:= ./smaccmpilot-stm32f4
-IVORY_RTV_SUBMODULE			:= ./ivory-rtverification
+RTV_TARGETS := \
+  $(RTV_MODULE)/rtv-lib \
+  $(RTV_MODULE)/rtv-example \
+  $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
 
-RTV_PLUGIN := instrument_plugin.so
-RTV_PLUGIN_DIR := $(IVORY_RTV_SUBMODULE)/gcc-plugin
-RTV_PLUGIN_BUILD := $(SMACCMPILOT_SUBMODULE)/gcc-plugin/$(RTV_PLUGIN)
-RTV_TARGETS := ivory-rtv/rtv-lib \
-	$(RTV_PLUGIN_BUILD) \
-	smaccmpilot/sample-rtv-task
+################################################################################
+# Runtime verification synonyms
+RTV_PLUGIN				:= instrument_plugin.so
+RTV_PLUGIN_AP	    := $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
+################################################################################
 
-.PHONY: all $(IVORY_TARGETS) $(TOWER_TARGETS) $(SMACCMPILOT_TARGETS)
-.PHONY: ivory-rtv/rtv-lib smaccmpilot/sample-rtv-task cbmc-reporter
+.PHONY: \
+  all \
+  $(IVORY_TARGETS) \
+  $(TOWER_TARGETS) \
+  $(SMACCMPILOT_TARGETS) \
+  ivory-rtv/rtv-lib \
+  cbmc-reporter \
+	$(RTV_TARGETS)
 
-all: $(SMACCMPILOT_TARGETS) $(TOWER_TARGETS) $(IVORY_TARGETS) cbmc-reporter
+all: \
+  $(SMACCMPILOT_TARGETS) \
+  $(TOWER_TARGETS) \
+  $(IVORY_TARGETS) \
+  cbmc-reporter \
+	$(RTV_TARGETS)
 
 ################################################################################
 # Ivory
-ivory/ivory:
-	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory
+$(IVORY_MODULE)/ivory:
+	$(CABAL_INSTALL) $@
 
-ivory/ivory-opts: ivory/ivory
-	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory-opts
+$(IVORY_MODULE)/ivory-opts: $(IVORY_MODULE)/ivory
+	$(CABAL_INSTALL) $@
 
-ivory/ivory-stdlib: ivory/ivory
-	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory-stdlib
+$(IVORY_MODULE)/ivory-stdlib: $(IVORY_MODULE)/ivory
+	$(CABAL_INSTALL) $@
 
-ivory/ivory-backend-c: ivory/ivory ivory/ivory-opts
-	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory-backend-c
+$(IVORY_MODULE)/ivory-backend-c: $(IVORY_MODULE)/ivory
+$(IVORY_MODULE)/ivory-backend-c: $(IVORY_MODULE)/ivory-opts
+	$(CABAL_INSTALL) $@
 
-ivory/ivory-examples: ivory/ivory ivory/ivory-opts ivory/ivory-backend-c
-	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory-examples
+$(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory
+$(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory-opts
+$(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory-backend-c
+	$(CABAL_INSTALL) $@
 
-ivory/ivory-bitdata: ivory/ivory-backend-c
-	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory-bitdata
+$(IVORY_MODULE)/ivory-bitdata: $(IVORY_MODULE)/ivory-backend-c
+	$(CABAL_INSTALL) $@
 
-ivory/ivory-hw: ivory/ivory-bitdata
-	$(CABAL_INSTALL) $(IVORY_SUBMODULE)/ivory-hw
+$(IVORY_MODULE)/ivory-hw: $(IVORY_MODULE)/ivory-bitdata
+	$(CABAL_INSTALL) $@
 
 ################################################################################
 # Tower
-tower/ivory-tower: $(IVORY_TARGETS)
-	$(CABAL_INSTALL) $(TOWER_SUBMODULE)/ivory-tower
+$(TOWER_MODULE)/ivory-tower: $(IVORY_TARGETS)
+	$(CABAL_INSTALL) $@
 
-tower/ivory-tower-freertos: $(IVORY_TARGETS) tower/ivory-tower
-	$(CABAL_INSTALL) $(TOWER_SUBMODULE)/ivory-tower-freertos
+$(TOWER_MODULE)/ivory-tower-freertos: $(IVORY_TARGETS)
+$(TOWER_MODULE)/ivory-tower-freertos: $(TOWER_MODULE)/ivory-tower
+	$(CABAL_INSTALL) $@
 
 ################################################################################
 # Model-checking
@@ -87,23 +112,48 @@ cbmc-reporter: spreadsheet
 	$(CABAL_INSTALL) ./cbmc-reporter
 
 ################################################################################
+# Runtime verification
+
+# Build the gcc plugin.  We'll need to build two versions of the plugin: one
+# suitable for testing on your build machine and one suitable for use with the
+# arm-gcc cross-compiler.  For the latter, we'll need a 32-bit build.  Your
+# machine may be a 64-bit machine.
+$(RTV_PLUGIN_AP):
+	$(MAKE) -C $(RTV_MODULE)/gcc-plugin clean
+	$(MAKE) -C $(RTV_MODULE)/gcc-plugin EXPLICIT32=1
+	mkdir -p $(SMACCMPILOT_MODULE)/gcc-plugin
+	mv $(RTV_MODULE)/gcc-plugin/$(RTV_PLUGIN) $@
+
+$(RTV_MODULE)/rtv-lib:
+	$(CABAL_INSTALL) $@
+
+$(RTV_MODULE)/rtv-example: $(RTV_MODULE)/rtv-lib
+	$(CABAL_INSTALL) $@
+
+$(RTV_TASK)/instrumented-decls: $(RTV_MODULE)/rtv-lib
+	bash $(RTV_MODULE)/rtv-lib/build-tools/find-instrumented.sh \
+    $(RTV_TASK) > $@
+
+$(RTV_TASK): $(IVORY_TARGETS) $(TOWER_TARGETS) $(RTV_PLUGIN_AP)
+$(RTV_TASK): $(RTV_MODULE)/rtv-lib $(RTV_TASK)/instrumented-decls
+	$(CABAL_INSTALL) $@
+
+################################################################################
 # SMACCMPilot
-smaccmpilot/ivory: $(IVORY_TARGETS) $(TOWER_TARGETS)
-smaccmpilot/ivory: smaccmpilot/mavlink smaccmpilot/ivory-hwf4wrapper
-	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/flight
+$(SMACCMPILOT_MODULE)/src/smaccm-mavlink: $(IVORY_TARGETS)
+	$(CABAL_INSTALL) $@
 
-smaccmpilot/mavlink: $(IVORY_TARGETS)
-	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/smaccm-mavlink
+$(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper: $(IVORY_TARGETS)
+	$(CABAL_INSTALL) $@
 
-smaccmpilot/ivory-bsp-stm32f4: $(IVORY_TARGETS) $(TOWER_TARGETS)
-	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/ivory-bsp-stm32f4
+$(SMACCMPILOT_MODULE)/src/flight: $(IVORY_TARGETS) $(TOWER_TARGETS)
+$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
+$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
+	$(CABAL_INSTALL) $@
 
-smaccmpilot/ivory-hwf4wrapper: $(IVORY_TARGETS)
-	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/src/ivory-hwf4wrapper
-
-smaccmpilot/sample-rtv-task: $(IVORY_TARGETS) $(TOWER_TARGETS)
-smaccmpilot/sample-rtv-task: ivory-rtv/rtv-lib
-	$(CABAL_INSTALL) $(SMACCMPILOT_SUBMODULE)/apps/sample-rtv-task
+$(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(IVORY_TARGETS)
+$(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(TOWER_TARGETS)
+	$(CABAL_INSTALL) $@
 
 ################################################################################
 # Clean
@@ -113,15 +163,6 @@ clean:
 
 .PHONY: veryclean
 veryclean: clean
-	rm -rf $(IVORY_SUBMODULE)/ivory/dist
-	rm -rf $(IVORY_SUBMODULE)/ivory-opts/dist
-	rm -rf $(IVORY_SUBMODULE)/ivory-stdlib/dist
-	rm -rf $(IVORY_SUBMODULE)/ivory-backend-c/dist
-	rm -rf $(IVORY_SUBMODULE)/ivory-bitdata/dist
-	rm -rf $(IVORY_SUBMODULE)/ivory-hw/dist
-	rm -rf $(TOWER_SUBMODULE)/ivory-tower/dist
-	rm -rf $(TOWER_SUBMODULE)/ivory-tower-freertos/dist
-	rm -rf $(SMACCMPILOT_SUBMODULE)/src/flight/dist
-	rm -rf $(SMACCMPILOT_SUBMODULE)/src/smaccm-mavlink/dist
-	rm -rf $(SMACCMPILOT_SUBMODULE)/src/bsp/ivory/ivory-bsp-stm32f4/dist
-	rm -rf $(SMACCMPILOT_SUBMODULE)/src/bsp/ivory/ivory-bsp-hwf4wrapper/dist
+	find . -name "dist" | xargs rm -rf
+	rm -rf $(RTV_TASK)/instrumented-decls
+	rm -rf $(SMACCMPILOT_MODULE)/gcc-plugin

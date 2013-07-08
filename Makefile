@@ -38,8 +38,8 @@ else
 endif
 
 SMACCMPILOT_TARGETS := \
-	$(SMACCMPILOT_MODULE)/ivory-bsp-stm32f4 \
-	$(SMACCMPILOT_MODULE)/ivory-hwf4wrapper \
+	$(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4 \
+	$(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper \
 	$(SMACCMPILOT_MODULE)/src/flight \
 	$(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 

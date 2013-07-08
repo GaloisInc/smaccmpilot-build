@@ -1,13 +1,15 @@
-CABAL         := cabal-dev
-CABAL_INSTALL := $(CABAL) install --force-reinstalls
+# please use tabs (8 width)
+
+CABAL		:= cabal-dev
+CABAL_INSTALL	:= $(CABAL) install --force-reinstalls
 
 ################################################################################
 # Project directories
-IVORY_MODULE					:= ivory
-TOWER_MODULE					:= tower
-SMACCMPILOT_MODULE		:= smaccmpilot-stm32f4
-RTV_MODULE		      	:= ivory-rtverification
-RTV_TASK                := $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
+IVORY_MODULE		:= ivory
+TOWER_MODULE		:= tower
+SMACCMPILOT_MODULE	:= smaccmpilot-stm32f4
+RTV_MODULE		:= ivory-rtverification
+RTV_TASK		:= $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
 
 ################################################################################
 # Target summaries
@@ -30,7 +32,7 @@ else
 		$(IVORY_MODULE)/ivory-bitdata \
 		$(IVORY_MODULE)/ivory-hw
 
-	TOWER_TARGETS := \
+  TOWER_TARGETS := \
 		$(TOWER_MODULE)/ivory-tower \
 		$(TOWER_MODULE)/ivory-tower-freertos
 endif
@@ -41,31 +43,41 @@ SMACCMPILOT_TARGETS := \
 	$(SMACCMPILOT_MODULE)/src/flight \
 	$(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 
-RTV_TARGETS := \
-  $(RTV_MODULE)/rtv-lib \
-  $(RTV_MODULE)/rtv-example \
-  $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
+# Some systems may not have the correct toolchains available to build the
+# runtime verification (RTV) compiler plugin.
+# To omit the RTV targets, use
+#
+#    make RTV=0
+#
+ifeq ($(RTV),0)
+  RTV_TARGETS :=
+else
+  RTV_TARGETS := \
+	$(RTV_MODULE)/rtv-lib \
+	$(RTV_MODULE)/rtv-example \
+	$(SMACCMPILOT_MODULE)/apps/sample-rtv-task
+endif
 
 ################################################################################
 # Runtime verification synonyms
-RTV_PLUGIN				:= instrument_plugin.so
-RTV_PLUGIN_AP	    := $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
+RTV_PLUGIN		:= instrument_plugin.so
+RTV_PLUGIN_AP		:= $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
 ################################################################################
 
 .PHONY: \
-  all \
-  $(IVORY_TARGETS) \
-  $(TOWER_TARGETS) \
-  $(SMACCMPILOT_TARGETS) \
-  ivory-rtv/rtv-lib \
-  cbmc-reporter \
+	all \
+	$(IVORY_TARGETS) \
+	$(TOWER_TARGETS) \
+	$(SMACCMPILOT_TARGETS) \
+	ivory-rtv/rtv-lib \
+	cbmc-reporter \
 	$(RTV_TARGETS)
 
 all: \
-  $(SMACCMPILOT_TARGETS) \
-  $(TOWER_TARGETS) \
-  $(IVORY_TARGETS) \
-  cbmc-reporter \
+	$(SMACCMPILOT_TARGETS) \
+	$(TOWER_TARGETS) \
+	$(IVORY_TARGETS) \
+	cbmc-reporter \
 	$(RTV_TARGETS)
 
 ################################################################################

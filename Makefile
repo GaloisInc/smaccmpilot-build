@@ -65,12 +65,11 @@ RTV_PLUGIN_AP		:= $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
 ################################################################################
 
 .PHONY: \
-	all \
-	$(IVORY_TARGETS) \
-	$(TOWER_TARGETS) \
-	$(SMACCMPILOT_TARGETS) \
-	ivory-rtv/rtv-lib \
-	cbmc-reporter \
+  all \
+  $(SMACCMPILOT_TARGETS) \
+  $(IVORY_TARGETS) \
+  $(TOWER_TARGETS) \
+  cbmc-reporter \
 	$(RTV_TARGETS)
 
 all: \

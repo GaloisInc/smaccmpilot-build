@@ -83,45 +83,45 @@ all: \
 ################################################################################
 # Ivory
 $(IVORY_MODULE)/ivory:
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(IVORY_MODULE)/ivory-opts: $(IVORY_MODULE)/ivory
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(IVORY_MODULE)/ivory-stdlib: $(IVORY_MODULE)/ivory
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(IVORY_MODULE)/ivory-backend-c: $(IVORY_MODULE)/ivory
 $(IVORY_MODULE)/ivory-backend-c: $(IVORY_MODULE)/ivory-opts
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory
 $(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory-opts
 $(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory-backend-c
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(IVORY_MODULE)/ivory-bitdata: $(IVORY_MODULE)/ivory-backend-c
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(IVORY_MODULE)/ivory-hw: $(IVORY_MODULE)/ivory-bitdata
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 ################################################################################
 # Tower
 $(TOWER_MODULE)/ivory-tower: $(IVORY_TARGETS)
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(TOWER_MODULE)/ivory-tower-freertos: $(IVORY_TARGETS)
 $(TOWER_MODULE)/ivory-tower-freertos: $(TOWER_MODULE)/ivory-tower
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 ################################################################################
 # Model-checking
-spreadsheet:
-	$(CABAL_INSTALL) ./simple-spreadsheet-tools
+simple-spreadsheet-tools:
+	$(CABAL_INSTALL) $@/
 
-cbmc-reporter: spreadsheet
-	$(CABAL_INSTALL) ./cbmc-reporter
+cbmc-reporter: simple-spreadsheet-tools
+	$(CABAL_INSTALL) $@/
 
 ################################################################################
 # Runtime verification
@@ -137,10 +137,10 @@ $(RTV_PLUGIN_AP):
 	mv $(RTV_MODULE)/gcc-plugin/$(RTV_PLUGIN) $@
 
 $(RTV_MODULE)/rtv-lib:
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(RTV_MODULE)/rtv-example: $(RTV_MODULE)/rtv-lib
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(RTV_TASK)/instrumented-decls: $(RTV_MODULE)/rtv-lib
 	bash $(RTV_MODULE)/rtv-lib/build-tools/find-instrumented.sh \
@@ -148,24 +148,24 @@ $(RTV_TASK)/instrumented-decls: $(RTV_MODULE)/rtv-lib
 
 $(RTV_TASK): $(IVORY_TARGETS) $(TOWER_TARGETS) $(RTV_PLUGIN_AP)
 $(RTV_TASK): $(RTV_MODULE)/rtv-lib $(RTV_TASK)/instrumented-decls
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 ################################################################################
 # SMACCMPilot
 $(SMACCMPILOT_MODULE)/src/smaccm-mavlink: $(IVORY_TARGETS)
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper: $(IVORY_TARGETS)
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(SMACCMPILOT_MODULE)/src/flight: $(IVORY_TARGETS) $(TOWER_TARGETS)
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(IVORY_TARGETS)
 $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(TOWER_TARGETS)
-	$(CABAL_INSTALL) $@
+	$(CABAL_INSTALL) $@/
 
 ################################################################################
 # Clean

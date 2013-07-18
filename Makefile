@@ -70,6 +70,7 @@ RTV_PLUGIN_AP		:= $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
   $(IVORY_TARGETS) \
   $(TOWER_TARGETS) \
   cbmc-reporter \
+  simple-spreadsheet-tools \
 	$(RTV_TARGETS)
 
 all: \

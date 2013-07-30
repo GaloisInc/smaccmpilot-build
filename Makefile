@@ -1,3 +1,4 @@
+# -*- Mode: makefile-gmake; indent-tabs-mode: t; tab-width: 8 -*-
 # please use tabs (8 width)
 
 CABAL		:= cabal-dev
@@ -69,6 +70,7 @@ RTV_PLUGIN_AP		:= $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
   $(SMACCMPILOT_TARGETS) \
   $(IVORY_TARGETS) \
   $(TOWER_TARGETS) \
+  simple-spreadsheet-tools \
   cbmc-reporter \
   simple-spreadsheet-tools \
 	$(RTV_TARGETS)

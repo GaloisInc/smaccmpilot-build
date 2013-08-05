@@ -35,7 +35,8 @@ else
 
   TOWER_TARGETS := \
 		$(TOWER_MODULE)/ivory-tower \
-		$(TOWER_MODULE)/ivory-tower-freertos
+		$(TOWER_MODULE)/ivory-tower-freertos \
+		$(TOWER_MODULE)/ivory-tower-frontend
 endif
 
 SMACCMPILOT_TARGETS := \
@@ -115,6 +116,11 @@ $(TOWER_MODULE)/ivory-tower: $(IVORY_TARGETS)
 
 $(TOWER_MODULE)/ivory-tower-freertos: $(IVORY_TARGETS)
 $(TOWER_MODULE)/ivory-tower-freertos: $(TOWER_MODULE)/ivory-tower
+	$(CABAL_INSTALL) $@/
+
+$(TOWER_MODULE)/ivory-tower-frontend: $(IVORY_TARGETS)
+$(TOWER_MODULE)/ivory-tower-frontend: $(TOWER_MODULE)/ivory-tower
+$(TOWER_MODULE)/ivory-tower-frontend: $(TOWER_MODULE)/ivory-tower-freertos
 	$(CABAL_INSTALL) $@/
 
 ################################################################################

@@ -36,6 +36,7 @@ else
   TOWER_TARGETS := \
 		$(TOWER_MODULE)/ivory-tower \
 		$(TOWER_MODULE)/ivory-tower-freertos \
+		$(TOWER_MODULE)/ivory-tower-aadl \
 		$(TOWER_MODULE)/ivory-tower-frontend
 endif
 
@@ -118,9 +119,14 @@ $(TOWER_MODULE)/ivory-tower-freertos: $(IVORY_TARGETS)
 $(TOWER_MODULE)/ivory-tower-freertos: $(TOWER_MODULE)/ivory-tower
 	$(CABAL_INSTALL) $@/
 
+$(TOWER_MODULE)/ivory-tower-aadl: $(IVORY_TARGETS)
+$(TOWER_MODULE)/ivory-tower-aadl: $(TOWER_MODULE)/ivory-tower
+	$(CABAL_INSTALL) $@/
+
 $(TOWER_MODULE)/ivory-tower-frontend: $(IVORY_TARGETS)
 $(TOWER_MODULE)/ivory-tower-frontend: $(TOWER_MODULE)/ivory-tower
 $(TOWER_MODULE)/ivory-tower-frontend: $(TOWER_MODULE)/ivory-tower-freertos
+$(TOWER_MODULE)/ivory-tower-frontend: $(TOWER_MODULE)/ivory-tower-aadl
 	$(CABAL_INSTALL) $@/
 
 ################################################################################

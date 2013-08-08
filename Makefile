@@ -29,6 +29,7 @@ else
 		$(IVORY_MODULE)/ivory-opt \
 		$(IVORY_MODULE)/ivory-stdlib \
 		$(IVORY_MODULE)/ivory-backend-c \
+		$(IVORY_MODULE)/ivory-backend-aadl \
 		$(IVORY_MODULE)/ivory-examples \
 		$(IVORY_MODULE)/ivory-bitdata \
 		$(IVORY_MODULE)/ivory-hw
@@ -97,6 +98,9 @@ $(IVORY_MODULE)/ivory-stdlib: $(IVORY_MODULE)/ivory
 
 $(IVORY_MODULE)/ivory-backend-c: $(IVORY_MODULE)/ivory
 $(IVORY_MODULE)/ivory-backend-c: $(IVORY_MODULE)/ivory-opts
+	$(CABAL_INSTALL) $@/
+
+$(IVORY_MODULE)/ivory-backend-aadl: $(IVORY_MODULE)/ivory
 	$(CABAL_INSTALL) $@/
 
 $(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory

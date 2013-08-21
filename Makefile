@@ -45,6 +45,7 @@ SMACCMPILOT_TARGETS := \
 	$(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4 \
 	$(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper \
 	$(SMACCMPILOT_MODULE)/src/flight \
+	$(SMACCMPILOT_MODULE)/src/ivory-px4-hw \
 	$(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 
 # Some systems may not have the correct toolchains available to build the
@@ -170,6 +171,7 @@ $(RTV_TASK): $(RTV_MODULE)/rtv-lib $(RTV_TASK)/instrumented-decls
 
 ################################################################################
 # SMACCMPilot
+
 $(SMACCMPILOT_MODULE)/src/smaccm-mavlink: $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $@/
 
@@ -183,6 +185,10 @@ $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
 
 $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(IVORY_TARGETS)
 $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(TOWER_TARGETS)
+	$(CABAL_INSTALL) $@/
+
+$(SMACCMPILOT_MODULE)/src/ivory-px4-hw: $(IVORY_TARGETS) $(TOWER_TARGETS)
+$(SMACCMPILOT_MODULE)/src/ivory-px4-hw: $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4
 	$(CABAL_INSTALL) $@/
 
 ################################################################################

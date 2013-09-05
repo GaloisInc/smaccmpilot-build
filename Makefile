@@ -182,11 +182,6 @@ $(SMACCMPILOT_MODULE)/src/smaccm-mavlink: $(IVORY_TARGETS)
 $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper: $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $@/
 
-$(SMACCMPILOT_MODULE)/src/flight: $(IVORY_TARGETS) $(TOWER_TARGETS)
-$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
-$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
-	$(CABAL_INSTALL) $@/
-
 $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(IVORY_TARGETS)
 $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(TOWER_TARGETS)
 	$(CABAL_INSTALL) $@/
@@ -194,6 +189,14 @@ $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4: $(TOWER_TARGETS)
 $(SMACCMPILOT_MODULE)/src/ivory-px4-hw: $(IVORY_TARGETS) $(TOWER_TARGETS)
 $(SMACCMPILOT_MODULE)/src/ivory-px4-hw: $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4
 	$(CABAL_INSTALL) $@/
+
+$(SMACCMPILOT_MODULE)/src/flight: $(IVORY_TARGETS) $(TOWER_TARGETS)
+$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
+$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
+$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4
+$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-px4-hw
+	$(CABAL_INSTALL) $@/
+
 
 ################################################################################
 # GCS Commsec

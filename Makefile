@@ -11,7 +11,7 @@ TOWER_MODULE		:= tower
 SMACCMPILOT_MODULE	:= smaccmpilot-stm32f4
 RTV_MODULE		:= ivory-rtverification
 RTV_TASK		:= $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
-HXSTREAM                := $(SMACCMPILOT_MODULE)/src/hx-stream/hs
+HXSTREAM                := $(SMACCMPILOT_MODULE)/src/hx-stream
 COMMSEC                 := $(SMACCMPILOT_MODULE)/src/gcs
 
 ################################################################################
@@ -80,7 +80,8 @@ RTV_PLUGIN_AP		:= $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
   cbmc-reporter \
   simple-spreadsheet-tools \
   $(RTV_TARGETS) \
-  $(HXSTREAM) \
+  $(HXSTREAM)/hs \
+  $(HXSTREAM)/ivory \
   $(COMMSEC)
 
 all: \
@@ -201,10 +202,13 @@ $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-px4-hw
 ################################################################################
 # GCS Commsec
 
-$(HXSTREAM):
+$(HXSTREAM)/hs:
 	$(CABAL_INSTALL) $@/
 
-$(COMMSEC): $(HXSTREAM)
+$(HXSTREAM)/ivory:
+	$(CABAL_INSTALL) $@/
+
+$(COMMSEC): $(HXSTREAM)/hs $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 	$(CABAL_INSTALL) $@/
 
 ################################################################################

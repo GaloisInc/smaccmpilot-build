@@ -19,3 +19,6 @@
 [submodule "cbmc-reporter"]
 	path = cbmc-reporter
 	url = git@github.com:GaloisInc/cbmc-reporter.git
+[submodule "smaccmpilot-SiK"]
+	path = smaccmpilot-SiK
+	url = git@github.com:GaloisInc/smaccmpilot-SiK.git

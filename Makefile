@@ -48,6 +48,7 @@ SMACCMPILOT_TARGETS := \
 	$(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper \
 	$(SMACCMPILOT_MODULE)/src/flight \
 	$(SMACCMPILOT_MODULE)/src/ivory-px4-hw \
+	$(SMACCMPILOT_MODULE)/src/hx-stream/ivory \
 	$(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 
 # Some systems may not have the correct toolchains available to build the
@@ -196,6 +197,7 @@ $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-px4-hw
+$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/hx-stream/ivory
 	$(CABAL_INSTALL) $@/
 
 
@@ -222,3 +224,9 @@ veryclean: clean
 	find . -name "dist" | xargs rm -rf
 	rm -rf $(RTV_TASK)/instrumented-decls
 	rm -rf $(SMACCMPILOT_MODULE)/gcc-plugin
+
+
+todopreview:
+	curl https://api.github.com/markdown/raw \
+		-X POST -H "Content-Type: text/x-markdown" \
+		--data-binary @TODO.md  > todo.html

@@ -2,9 +2,9 @@
 
 ## Pat
 
+- 3dr radio firmware: mostly fixed, need to add fast signal strength
+  getters and integrate with SMACCMPilot.Flight.Datalink.
 - hil sim as a one-click checked into src/gcs/mavlink
-- 3dr radio firmware: figure out how difficult to fix once
-  debugger arrives, decide whether to fix now or later
 - tower haddock documentation
 
 ## James

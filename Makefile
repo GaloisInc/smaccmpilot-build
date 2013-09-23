@@ -12,7 +12,8 @@ SMACCMPILOT_MODULE	:= smaccmpilot-stm32f4
 RTV_MODULE		:= ivory-rtverification
 RTV_TASK		:= $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
 HXSTREAM                := $(SMACCMPILOT_MODULE)/src/hx-stream
-COMMSEC                 := $(SMACCMPILOT_MODULE)/src/gcs
+COMMSEC_GCS             := $(SMACCMPILOT_MODULE)/src/gcs
+COMMSEC_TEST            := $(SMACCMPILOT_MODULE)/apps/commsec-test
 
 ################################################################################
 # Target summaries
@@ -83,7 +84,8 @@ RTV_PLUGIN_AP		:= $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
   $(RTV_TARGETS) \
   $(HXSTREAM)/hs \
   $(HXSTREAM)/ivory \
-  $(COMMSEC)
+  $(COMMSEC_GCS) \
+  $(COMMSEC_TEST)
 
 all: \
 	$(SMACCMPILOT_TARGETS) \
@@ -197,7 +199,7 @@ $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-px4-hw
-$(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/hx-stream/ivory
+$(SMACCMPILOT_MODULE)/src/flight: $(HXSTREAM)/ivory
 	$(CABAL_INSTALL) $@/
 
 
@@ -210,7 +212,10 @@ $(HXSTREAM)/hs:
 $(HXSTREAM)/ivory:
 	$(CABAL_INSTALL) $@/
 
-$(COMMSEC): $(HXSTREAM)/hs $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
+$(COMMSEC_GCS): $(HXSTREAM)/hs $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
+	$(CABAL_INSTALL) $@/
+
+$(COMMSEC_TEST): $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $@/
 
 ################################################################################

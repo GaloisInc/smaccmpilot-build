@@ -2,10 +2,10 @@
 
 ## Pat
 
-- 3dr radio firmware: mostly fixed, finish fast signal strength
-  getters and SMACCMPilot.Flight.Datalink.
 - tower-aadl: new syntax from MW, warn if more than one period per task
 - hil sim as a one-click checked into src/gcs/mavlink
+- benchmark smaccm-SiK performance, look for bugs at high rates
+- implement radio info getter & decoder in SMACCMPilot.Flight.Datalink
 - tower haddock documentation
 
 ## James

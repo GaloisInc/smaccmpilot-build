@@ -2,8 +2,9 @@
 
 ## Pat
 
-- 3dr radio firmware: mostly fixed, need to add fast signal strength
-  getters and integrate with SMACCMPilot.Flight.Datalink.
+- 3dr radio firmware: mostly fixed, finish fast signal strength
+  getters and SMACCMPilot.Flight.Datalink.
+- tower-aadl: new syntax from MW, warn if more than one period per task
 - hil sim as a one-click checked into src/gcs/mavlink
 - tower haddock documentation
 

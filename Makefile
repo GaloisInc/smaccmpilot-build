@@ -14,7 +14,7 @@ RTV_TASK		:= $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
 HXSTREAM                := $(SMACCMPILOT_MODULE)/src/hx-stream
 COMMSEC_GCS             := $(SMACCMPILOT_MODULE)/src/gcs
 COMMSEC_TEST            := $(SMACCMPILOT_MODULE)/apps/commsec-test
-
+SHARED                  := $(SMACCMPILOT_MODULE)/src/shared
 ################################################################################
 # Target summaries
 
@@ -50,7 +50,8 @@ SMACCMPILOT_TARGETS := \
 	$(SMACCMPILOT_MODULE)/src/flight \
 	$(SMACCMPILOT_MODULE)/src/ivory-px4-hw \
 	$(SMACCMPILOT_MODULE)/src/hx-stream/ivory \
-	$(SMACCMPILOT_MODULE)/src/smaccm-mavlink
+	$(SMACCMPILOT_MODULE)/src/smaccm-mavlink \
+	$(SMACCMPILOT_MODULE)/src/shared
 
 # Some systems may not have the correct toolchains available to build the
 # runtime verification (RTV) compiler plugin.
@@ -199,17 +200,20 @@ $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-px4-hw
+$(SMACCMPILOT_MODULE)/src/flight: $(SHARED)
 $(SMACCMPILOT_MODULE)/src/flight: $(HXSTREAM)/ivory
 	$(CABAL_INSTALL) $@/
-
 
 ################################################################################
 # GCS Commsec
 
+$(SHARED): $(IVORY_MODULE)/ivory
+	$(CABAL_INSTALL) $@/
+
 $(HXSTREAM)/hs:
 	$(CABAL_INSTALL) $@/
 
-$(HXSTREAM)/ivory:
+$(HXSTREAM)/ivory: $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $@/
 
 $(COMMSEC_GCS): $(HXSTREAM)/hs $(SMACCMPILOT_MODULE)/src/smaccm-mavlink

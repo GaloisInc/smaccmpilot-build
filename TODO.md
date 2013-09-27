@@ -2,7 +2,7 @@
 
 ## Pat
 
-- hil sim as a one-click checked into src/gcs/mavlink
+- get hil packets working in SMACCMPilot.Flight.GCS
 - benchmark smaccm-SiK performance, look for bugs at high rates
 - implement radio info getter & decoder in SMACCMPilot.Flight.Datalink
 - tower haddock documentation

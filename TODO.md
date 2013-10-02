@@ -2,16 +2,29 @@
 
 ## Pat
 
-- get hil packets working in SMACCMPilot.Flight.GCS
-- benchmark smaccm-SiK performance, look for bugs at high rates
-- implement radio info getter & decoder in SMACCMPilot.Flight.Datalink
+After Commsec/ new mavlink merge complete:
+- get HIL_STATE packets working on vehicle side
+
+- mavlink output integration:
+    - new radio status messages
+    - position from GPS, deprecate position_result
+- test GPS code moving around outdoors, check dop / valid fix threshold
+- test AHRS with GPS integration: spot check? compare to ArduCopter?
+
+- test smaccm-SiK performance, look for bugs at high rates
+    - once complete, document, send to red team
+
+- ground control station upgrades
+    - user input (gamepad)
+    - viewer via mavelous
+    - mode change via MAVLink command
+
 - tower haddock documentation
 
 ## James
 
 - Get parameter code into master w/o nonvolatile memory backing
-- Tune stabilize loops for the big ArduCopter frame, notify
-  red team so they can test their vehicle with FMU17+PWM out
+- flight mode multiplexer for testing gains, tuning 3dr quad
 
 ## Lee
 
@@ -19,9 +32,11 @@
 
 ## Everyone
 
-- Implement APMCopter's alt hold, loiter, guided mode in Ivory
-  - Leonard will probably be available to give a hand with high level spec
-    during week of Sept 30.
+- sensor fusion: inertial sensors with position (APM calls this AP_InetialNav)
+- upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)
+- altitude hold / throttle controller
+- loiter position hold controller
+- mavlink command to set target position (APM calls this guided mode)
 
 # Longer term issues:
 
@@ -29,16 +44,12 @@
   a pure ivory/tower impl of EEPROM/FRAM storage so we don't do the same work
   twice
 
-- Commsec adoption in community. Will require:
+- Commsec adoption in community. Continue conversations with Nikos and Lorenz
     - documentation (specification)
     - a port to PX4 Stack (C) and new APM Planner (QT/C++) as an optional
       feature (enabled by default, hopefully)
     - keying story, and ship with default keys
-    - any remaining concerns from Lorenz and Tridge?
-    - finishing hx framed 3DR Radio firmware would be gravy
-
-- we don't have a story for CI testing with HIL. Will this become enough of a
-  pain point to warrant some sort of automatic testing?
+    - adopting hx framed 3DR Radio protocol, via smaccm-sik or otherwise?
 
 - smaccmpilot.org software documentation
     - latest work on standalone_apahrs, tower, parameters, datalink, etc etc

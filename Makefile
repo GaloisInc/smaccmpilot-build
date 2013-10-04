@@ -83,6 +83,7 @@ RTV_PLUGIN_AP		:= $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
   cbmc-reporter \
   simple-spreadsheet-tools \
   $(RTV_TARGETS) \
+  $(SHARED) \
   $(HXSTREAM)/hs \
   $(HXSTREAM)/ivory \
   $(COMMSEC_GCS) \
@@ -93,7 +94,12 @@ all: \
 	$(TOWER_TARGETS) \
 	$(IVORY_TARGETS) \
 	cbmc-reporter \
-	$(RTV_TARGETS)
+	$(RTV_TARGETS) \
+        $(SHARED) \
+        $(HXSTREAM)/hs \
+        $(HXSTREAM)/ivory \
+        $(COMMSEC_GCS) \
+        $(COMMSEC_TEST)
 
 ################################################################################
 # Ivory

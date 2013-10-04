@@ -187,7 +187,7 @@ $(RTV_TASK): $(RTV_MODULE)/rtv-lib $(RTV_TASK)/instrumented-decls
 ################################################################################
 # SMACCMPilot
 
-$(SMACCMPILOT_MODULE)/src/smaccm-mavlink: $(IVORY_TARGETS)
+$(SMACCMPILOT_MODULE)/src/smaccm-mavlink: $(IVORY_TARGETS) $(SHARED)
 	$(CABAL_INSTALL) $@/
 
 $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper: $(IVORY_TARGETS)
@@ -222,7 +222,7 @@ $(HXSTREAM)/hs:
 $(HXSTREAM)/ivory: $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $@/
 
-$(COMMSEC_GCS): $(HXSTREAM)/hs $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
+$(COMMSEC_GCS): $(HXSTREAM)/hs $(SMACCMPILOT_MODULE)/src/smaccm-mavlink $(SHARED)
 	$(CABAL_INSTALL) $@/
 
 $(COMMSEC_TEST): $(IVORY_TARGETS)

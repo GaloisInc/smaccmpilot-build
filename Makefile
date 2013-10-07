@@ -207,7 +207,9 @@ $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-hwf4wrapper
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-bsp-stm32f4
 $(SMACCMPILOT_MODULE)/src/flight: $(SMACCMPILOT_MODULE)/src/ivory-px4-hw
+
 $(SMACCMPILOT_MODULE)/src/flight: $(COMM_SHARED)
+$(SMACCMPILOT_MODULE)/src/flight: $(COMMSEC_GCS)
 $(SMACCMPILOT_MODULE)/src/flight: $(HXSTREAM)/ivory
 	$(CABAL_INSTALL) $@/
 

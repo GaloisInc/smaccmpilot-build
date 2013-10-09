@@ -2,12 +2,10 @@
 
 ## Pat
 
-After Commsec/ new mavlink merge complete:
-- get HIL_STATE packets working on vehicle side
-
+- further checks to make sure HIL flying properly
+    - mavelous integration will help here
 - mavlink output integration:
     - new radio status messages
-    - position from GPS, deprecate position_result
 - test GPS code moving around outdoors, check dop / valid fix threshold
 - test AHRS with GPS integration: spot check? compare to ArduCopter?
 
@@ -17,21 +15,19 @@ After Commsec/ new mavlink merge complete:
 - ground control station upgrades
     - user input (gamepad)
     - viewer via mavelous
-    - mode change via MAVLink command
+    - arming, mode change via MAVLink command
 
 - tower haddock documentation
 
 ## James
 
-- Get parameter code into master w/o nonvolatile memory backing
 - flight mode multiplexer for testing gains, tuning 3dr quad
 
 ## Lee
 
-- Commsec into master
+## Anyone
 
-## Everyone
-
+- smaccm-SiK polling & reporting in CommsecServer
 - sensor fusion: inertial sensors with position (APM calls this AP_InetialNav)
 - upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)
 - altitude hold / throttle controller

@@ -2,10 +2,13 @@
 
 ## Pat
 
+- mavlink implementation:
+    - datastream scheduler to proper evented implementation
+    - integrate datalink radio status
+    - check real gps integration
+
 - further checks to make sure HIL flying properly
     - mavelous integration will help here
-- mavlink output integration:
-    - new radio status messages
 - test GPS code moving around outdoors, check dop / valid fix threshold
 - test AHRS with GPS integration: spot check? compare to ArduCopter?
 

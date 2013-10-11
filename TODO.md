@@ -2,9 +2,9 @@
 
 ## Pat
 
+- datalink / gcs with sik: debug high loss rates / intermittent operation
+
 - mavlink implementation:
-    - datastream scheduler to proper evented implementation
-    - integrate datalink radio status
     - check real gps integration
 
 - further checks to make sure HIL flying properly

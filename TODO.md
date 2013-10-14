@@ -3,22 +3,12 @@
 ## Pat
 
 - datalink / gcs with sik: debug high loss rates / intermittent operation
-
-- mavlink implementation:
-    - check real gps integration
-
-- further checks to make sure HIL flying properly
-    - mavelous integration will help here
-- test GPS code moving around outdoors, check dop / valid fix threshold
-- test AHRS with GPS integration: spot check? compare to ArduCopter?
-
 - test smaccm-SiK performance, look for bugs at high rates
     - once complete, document, send to red team
 
-- ground control station upgrades
-    - user input (gamepad)
-    - viewer via mavelous
-    - arming, mode change via MAVLink command
+- test GPS code moving around outdoors, check dop / valid fix threshold
+
+- test AHRS with GPS integration: spot check? compare to ArduCopter?
 
 - tower haddock documentation
 
@@ -26,7 +16,15 @@
 
 - flight mode multiplexer for testing gains, tuning 3dr quad
 
+- ground control station upgrades
+    - viewer via mavelous
+- check to make sure HIL flying properly
+    - mavelous integration will help here
+
 ## Lee
+
+- ground control station upgrades
+    - user input (gamepad)
 
 ## Anyone
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 git remote add origin-ssh git@github.com:GaloisInc/smaccmpilot-build.git
 git fetch origin-ssh
 

@@ -13,6 +13,7 @@ RTV_MODULE		:= ivory-rtverification
 RTV_TASK		:= $(SMACCMPILOT_MODULE)/apps/sample-rtv-task
 HXSTREAM                := $(SMACCMPILOT_MODULE)/src/hx-stream
 COMMSEC_GCS             := $(SMACCMPILOT_MODULE)/src/gcs
+GCS_GATEWAY             := smaccmpilot-gcs-gateway
 COMMSEC_TEST            := $(SMACCMPILOT_MODULE)/src/gcs/commsec-test
 COMM_SHARED             := $(SMACCMPILOT_MODULE)/src/smaccm-shared-comm
 ################################################################################
@@ -87,7 +88,8 @@ RTV_PLUGIN_AP		:= $(SMACCMPILOT_MODULE)/gcc-plugin/$(RTV_PLUGIN)
   $(HXSTREAM)/hs \
   $(HXSTREAM)/ivory \
   $(COMMSEC_GCS) \
-  $(COMMSEC_TEST)
+  $(COMMSEC_TEST) \
+  $(GCS_GATEWAY)
 
 all: \
 	$(SMACCMPILOT_TARGETS) \
@@ -99,7 +101,8 @@ all: \
         $(HXSTREAM)/hs \
         $(HXSTREAM)/ivory \
         $(COMMSEC_GCS) \
-        $(COMMSEC_TEST)
+        $(COMMSEC_TEST) \
+	$(GCS_GATEWAY)
 
 ################################################################################
 # Ivory
@@ -233,6 +236,10 @@ $(COMMSEC_GCS): $(COMM_SHARED)
 $(COMMSEC_TEST): $(IVORY_TARGETS)
 	$(CABAL_INSTALL) $@/
 
+$(GCS_GATEWAY): $(HXSTREAM)/hs
+$(GCS_GATEWAY): $(SMACCMPILOT_MODULE)/src/smaccm-mavlink
+$(GCS_GATEWAY): $(COMM_SHARED)
+	$(CABAL_INSTALL) $@/
 ################################################################################
 # Clean
 .PHONY: clean

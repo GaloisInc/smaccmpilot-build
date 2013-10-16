@@ -22,3 +22,6 @@
 [submodule "smaccmpilot-SiK"]
 	path = smaccmpilot-SiK
 	url = https://github.com/GaloisInc/smaccmpilot-SiK.git
+[submodule "smaccmpilot-gcs-gateway"]
+	path = smaccmpilot-gcs-gateway
+	url = https://github.com/GaloisInc/smaccmpilot-gcs-gateway

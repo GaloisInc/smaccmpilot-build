@@ -6,32 +6,50 @@
 - test smaccm-SiK performance, look for bugs at high rates
     - once complete, document, send to red team
 
-- test GPS code moving around outdoors, check dop / valid fix threshold
+- smaccm-gcs-gateway:
+    - revert to pipes branch
+    - smaccm-SiK polling & reporting
+    - link managment
+        - pack multiple mavlink packets into crypto frame
+        - rate limit mavlink to prevent filling internal buffers
 
+- onboard datalink:
+    - feed onboard smaccm-SiK reporting down datalink (check this code for bugs)
+    - integrate stream rate scheduler with smaccm-Sik reporting
+    - pack multiple mavlink packets into crypto frame
+
+- test GPS code moving around outdoors, check dop / valid fix threshold
 - test AHRS with GPS integration: spot check? compare to ArduCopter?
 
-- tower haddock documentation
 
 ## James
 
-- flight mode multiplexer for testing gains, tuning 3dr quad
 
 - ground control station upgrades
     - viewer via mavelous
 - check to make sure HIL flying properly
     - mavelous integration will help here
 
+- altitude hold / throttle controller
+- upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)
+
+- flight tuning 3dr quad
+    - need to create wiring harness for the Galois 3dr quad
+
 ## Lee
 
-- ground control station upgrades
-    - user input (gamepad)
+- fix the model checker timeouts (program under test is too big now!)
+- fact check & update smaccmpilot.org
+
+
+## Tom
+
+- commsec documentation (specification)
+    - including keying arrangement for wider adoption
 
 ## Anyone
 
-- smaccm-SiK polling & reporting in CommsecServer
-- sensor fusion: inertial sensors with position (APM calls this AP_InetialNav)
-- upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)
-- altitude hold / throttle controller
+- sensor fusion: inertial sensors with position (APM calls this AP_InertialNav)
 - loiter position hold controller
 - mavlink command to set target position (APM calls this guided mode)
 
@@ -41,16 +59,19 @@
   a pure ivory/tower impl of EEPROM/FRAM storage so we don't do the same work
   twice
 
-- Commsec adoption in community. Continue conversations with Nikos and Lorenz
-    - documentation (specification)
-    - a port to PX4 Stack (C) and new APM Planner (QT/C++) as an optional
-      feature (enabled by default, hopefully)
-    - keying story, and ship with default keys
-    - adopting hx framed 3DR Radio protocol, via smaccm-sik or otherwise?
-
 - smaccmpilot.org software documentation
     - latest work on standalone_apahrs, tower, parameters, datalink, etc etc
     - give it a twice over before Jan 14 PI meeting but just let it decay in the meantime
+
+- haddock documentation:
+    - tower
+    - various smaccmpilot libraries
+    - gcs code
+    - smaccmpilot app
+
+- better grouping of related tasks/comm primitives at the tower level
+    - graphviz of the big smaccmpilot app is stumbling towards uselessness
+    - internally, change to trees instead of lists of Nodes/dataports/channels
 
 - try new cabal sandboxes and/or create a build system that doesn't Suck The Joy
   Out of Developing Haskell (TM)

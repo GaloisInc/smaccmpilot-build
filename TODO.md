@@ -2,6 +2,8 @@
 
 ## Pat
 
+- ground control station: pull in mavelous
+
 - datalink / gcs with sik: debug high loss rates / intermittent operation
 - test smaccm-SiK performance, look for bugs at high rates
     - once complete, document, send to red team
@@ -25,8 +27,6 @@
 ## James
 
 
-- ground control station upgrades
-    - viewer via mavelous
 - check to make sure HIL flying properly
     - mavelous integration will help here
 

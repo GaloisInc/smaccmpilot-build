@@ -2,22 +2,20 @@
 
 ## Pat
 
-- ground control station: pull in mavelous
-
-- datalink / gcs with sik: debug high loss rates / intermittent operation
-- test smaccm-SiK performance, look for bugs at high rates
-    - once complete, document, send to red team
+- smaccm-sik:
+    - document intermittent operation for red team
+    - flow control: more info needed?
 
 - smaccm-gcs-gateway:
-    - revert to pipes branch
-    - smaccm-SiK polling & reporting
+    - go back to using pipes
+    - smaccm-SiK reporting: another socket? just stderr?
     - link managment
         - pack multiple mavlink packets into crypto frame
-        - rate limit mavlink to prevent filling internal buffers
+        - flow control
 
 - onboard datalink:
     - feed onboard smaccm-SiK reporting down datalink (check this code for bugs)
-    - integrate stream rate scheduler with smaccm-Sik reporting
+    - integrate stream rate scheduler with smaccm-Sik reporting (flow control)
     - pack multiple mavlink packets into crypto frame
 
 - test GPS code moving around outdoors, check dop / valid fix threshold
@@ -28,7 +26,6 @@
 
 
 - check to make sure HIL flying properly
-    - mavelous integration will help here
 
 - altitude hold / throttle controller
 - upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)

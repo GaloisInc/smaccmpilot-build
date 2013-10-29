@@ -2,12 +2,30 @@
 
 ## Pat
 
+- apm blob:
+    - remove code related to delay callback
+    - check to see if timer proc blocking needs to be recursive
+    - remove everything having to do with hwf4/timer/timer_usleep &
+      SMACCMScheduler::delay_microseconds
+    - remove timer_msleep from hwf4
+    - three or four isrs:
+        - one or two timers??
+        - I2C: i2c2
+        - SPI: just spi1
+    - can we get rid of eeprom?
+
+- tower/FreeRTOS:
+    - deprecate queue wrapper
+    - write the list of task entrypoints to a file
+
 - tower/AADL:
     - AADL output should use stable names
     - smaccmpilot parameter code should give more descriptive, unique names
     - give warning when AADL names are not unique?
     - make sure AADL target is part of jenkins build
     - arbitrary AADL properties per Tower node
+    - AADL property output for extern (e.g. apm blob) required semaphores,
+      task entrypoints
 
 - smaccm-sik:
     - brief gerwin

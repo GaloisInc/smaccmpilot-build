@@ -2,9 +2,17 @@
 
 ## Pat
 
+- tower/AADL:
+    - AADL output should use stable names
+    - smaccmpilot parameter code should give more descriptive, unique names
+    - give warning when AADL names are not unique?
+    - make sure AADL target is part of jenkins build
+    - arbitrary AADL properties per Tower node
+
 - smaccm-sik:
+    - brief gerwin
     - document intermittent operation for red team
-    - flow control: more info needed?
+    - flow control: any changes to radio firmware needed for full info?
 
 - smaccm-gcs-gateway:
     - go back to using pipes
@@ -14,16 +22,17 @@
         - flow control
 
 - onboard datalink:
-    - feed onboard smaccm-SiK reporting down datalink (check this code for bugs)
-    - integrate stream rate scheduler with smaccm-Sik reporting (flow control)
+    - check radio-status decode for bugs
+    - flow control: integrate stream rate scheduler with radio-status
     - pack multiple mavlink packets into crypto frame
 
-- test GPS code moving around outdoors, check dop / valid fix threshold
-- test AHRS with GPS integration: spot check? compare to ArduCopter?
+
+- After Nov 31 Drop:
+    - test GPS code moving around outdoors, check dop / valid fix threshold
+    - test AHRS with GPS integration: spot check? compare to ArduCopter?
 
 
 ## James
-
 
 - check to make sure HIL flying properly
 

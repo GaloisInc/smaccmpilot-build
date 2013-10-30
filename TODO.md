@@ -2,18 +2,6 @@
 
 ## Pat
 
-- apm blob:
-    - remove code related to delay callback
-    - check to see if timer proc blocking needs to be recursive
-    - remove everything having to do with hwf4/timer/timer\_usleep &
-      SMACCMScheduler::delay_microseconds
-    - remove timer\_msleep from hwf4
-    - three or four isrs:
-        - one or two timers??
-        - I2C: i2c2
-        - SPI: just spi1
-    - can we get rid of eeprom?
-
 - tower/FreeRTOS:
     - deprecate queue wrapper
     - write the list of task entrypoints to a file
@@ -27,9 +15,16 @@
     - AADL property output for extern (e.g. apm blob) required semaphores,
       task entrypoints
     - generate SMACCM\_SYS property set
+        - need someone to send me the canonical version
+
+- apm blob:
+    - echronos hookup for the three or four isrs:
+        - one or two timers??
+        - I2C: i2c2
+        - SPI: just spi1
+    - can we get rid of eeprom? not going to worry about now
 
 - smaccm-sik:
-    - brief gerwin
     - document intermittent operation for red team
     - flow control: any changes to radio firmware needed for full info?
 

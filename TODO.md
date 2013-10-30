@@ -5,9 +5,9 @@
 - apm blob:
     - remove code related to delay callback
     - check to see if timer proc blocking needs to be recursive
-    - remove everything having to do with hwf4/timer/timer_usleep &
+    - remove everything having to do with hwf4/timer/timer\_usleep &
       SMACCMScheduler::delay_microseconds
-    - remove timer_msleep from hwf4
+    - remove timer\_msleep from hwf4
     - three or four isrs:
         - one or two timers??
         - I2C: i2c2
@@ -26,6 +26,7 @@
     - arbitrary AADL properties per Tower node
     - AADL property output for extern (e.g. apm blob) required semaphores,
       task entrypoints
+    - generate SMACCM\_SYS property set
 
 - smaccm-sik:
     - brief gerwin

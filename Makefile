@@ -34,6 +34,7 @@ else
 		$(IVORY_MODULE)/ivory-stdlib \
 		$(IVORY_MODULE)/ivory-backend-c \
 		$(IVORY_MODULE)/ivory-backend-aadl \
+		$(IVORY_MODULE)/ivory-quickcheck \
 		$(IVORY_MODULE)/ivory-examples \
 		$(IVORY_MODULE)/ivory-bitdata \
 		$(IVORY_MODULE)/ivory-hw
@@ -60,6 +61,7 @@ SMACCMPILOT_TARGETS := \
 #
 #    make RTV=0
 #
+RTV = 0
 ifeq ($(RTV),0)
   RTV_TARGETS :=
 else
@@ -122,9 +124,13 @@ $(IVORY_MODULE)/ivory-backend-c: $(IVORY_MODULE)/ivory-opts
 $(IVORY_MODULE)/ivory-backend-aadl: $(IVORY_MODULE)/ivory
 	$(CABAL_INSTALL) $@/
 
+$(IVORY_MODULE)/ivory-quickcheck: $(IVORY_MODULE)/ivory
+	$(CABAL_INSTALL) $@/
+
 $(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory
 $(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory-opts
 $(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory-backend-c
+$(IVORY_MODULE)/ivory-examples: $(IVORY_MODULE)/ivory-quickcheck
 	$(CABAL_INSTALL) $@/
 
 $(IVORY_MODULE)/ivory-bitdata: $(IVORY_MODULE)/ivory-backend-c

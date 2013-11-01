@@ -2,30 +2,25 @@
 
 ## Pat
 
-- tower/FreeRTOS:
-    - deprecate queue wrapper
+- tower/FreeRTOS echoronos shim support:
     - write the list of task entrypoints to a file
 
-- tower/AADL:
-    - AADL output should use stable names
-    - smaccmpilot parameter code should give more descriptive, unique names
-    - give warning when AADL names are not unique?
-    - make sure AADL target is part of jenkins build
-    - arbitrary AADL properties per Tower node
-    - AADL property output for extern (e.g. apm blob) required semaphores,
-      task entrypoints
+- tower/AADL high priority:
+    - unified solution for stable, unique names:
+        - create a uniqueness checker to give warnings during aadl output
+          rather than the long feedback cycle through the RC aadl toolchain
+        - use human-provided names without automatic uniqueness when
+          possible and punt the bad names back to the user
+        - smaccmpilot parameter code needs to somehow generate meaningful
+          names. (Should I ask James to look at this, or figure it out myself?)
     - generate SMACCM\_SYS property set
         - need someone to send me the canonical version
 
-- apm blob:
-    - echronos hookup for the three or four isrs:
-        - one or two timers??
-        - I2C: i2c2
-        - SPI: just spi1
-    - can we get rid of eeprom? not going to worry about now
-
 - smaccm-sik:
-    - document intermittent operation for red team
+    - document issues:
+        - we may be close to solving the no-traffic hang, if its related
+          to buffering
+        - tdm loop hang is 'solved' by watchdog
     - flow control: any changes to radio firmware needed for full info?
 
 - smaccm-gcs-gateway:
@@ -40,11 +35,24 @@
     - flow control: integrate stream rate scheduler with radio-status
     - pack multiple mavlink packets into crypto frame
 
+- tower/AADL lower priority:
+    - make sure AADL target is part of jenkins build
+    - arbitrary AADL properties per Tower node
+    - AADL property output for extern (e.g. apm blob) required semaphores,
+      task entrypoints.
+        - what is the syntax for this?
+        - should I do this, or just leave it to Mike?
+
+- apm blob should be ready for others to work with.
+    - echronos hookup for the isrs:
+        - I2C: i2c2
+        - SPI: just spi1
+        - narrow down exactly which timers are needed?
+    - can we get rid of eeprom? not going to worry about now
 
 - After Nov 31 Drop:
     - test GPS code moving around outdoors, check dop / valid fix threshold
     - test AHRS with GPS integration: spot check? compare to ArduCopter?
-
 
 ## James
 
@@ -92,9 +100,6 @@
 - better grouping of related tasks/comm primitives at the tower level
     - graphviz of the big smaccmpilot app is stumbling towards uselessness
     - internally, change to trees instead of lists of Nodes/dataports/channels
-
-- try new cabal sandboxes and/or create a build system that doesn't Suck The Joy
-  Out of Developing Haskell (TM)
 
 ## Pixhawk HW platform
 - separate sensor IO from AP_AHRS sensor fusion; elimintate AP_HAL completely from AP_AHRS

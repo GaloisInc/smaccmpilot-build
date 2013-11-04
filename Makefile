@@ -17,6 +17,9 @@ smaccmpilot-all: .cabal-sandbox
 	@cabal sandbox init
 	@cabal sandbox add-source `find . -name "*.cabal" -printf "%h\n"`
 
-clean:
+sandbox-clean:
 	rm -rf cabal.sandbox.config .cabal-sandbox
 
+clean:
+	@echo "Clean in the top level will remove your cabal sandbox."
+	@echo "If you're sure you want to do this, use the 'sandbox-clean' target"

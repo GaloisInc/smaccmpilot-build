@@ -66,7 +66,6 @@
 - fix the model checker timeouts (program under test is too big now!)
 - fact check & update smaccmpilot.org
 - RV task for commsec messages
-- Add requires filtering in QuickCheck generation?
 - Ivory model-checker
 
 ## Tom

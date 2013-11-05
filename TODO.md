@@ -2,9 +2,6 @@
 
 ## Pat
 
-- tower/FreeRTOS echoronos shim support:
-    - write the list of task entrypoints to a file
-
 - tower/AADL high priority:
     - unified solution for stable, unique names:
         - create a uniqueness checker to give warnings during aadl output

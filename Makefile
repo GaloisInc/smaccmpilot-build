@@ -21,5 +21,6 @@ sandbox-clean:
 	rm -rf cabal.sandbox.config .cabal-sandbox
 
 clean:
-	@echo "Clean in the top level will remove your cabal sandbox."
-	@echo "If you're sure you want to do this, use the 'sandbox-clean' target"
+	@$(MAKE) -C smaccmpilot-stm32f4 clean
+	@echo "Clean in the top level does not remove your cabal sandbox."
+	@echo "If you want to remove your cabal sandbox, use the 'sandbox-clean' target"

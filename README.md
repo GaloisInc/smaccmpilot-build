@@ -3,6 +3,17 @@
 An umbrella repository which organizes all of the dependencies required to build
 the SMACCMPilot project.
 
+## Information
+
+More information about the SMACCMPilot project on the web at
+[smaccmpilot.org][].
+
+Developers are encouraged to [join our mailing list][list] for project
+updates.
+
+[smaccmpilot.org]: http://smaccmpilot.org
+[list]: http://community.galois.com/mailman/listinfo/smaccmpilot
+
 ## Prerequisites
 
 A description of required prerequisites [is available on smaccmpilot.org][prereq].
@@ -23,25 +34,9 @@ To fetch the submodules after cloning, run
 
 ## Makefile Options
 
-The default make target `all` will build the Ivory compiler, runtime
-verification tools, test applications, and the main SMACCMPilot application.
-
-Currently, runtime verification tools are yet not required for the SMACCMPilot
-applciation. You can disable building the runtime verification tools by invoking
-make with the flag `RTV=0`, e.g.,
-
-```
-make RTV=0
-```
-
-Most users will not need to modify the Ivory or Tower library code. To speed up
-builds where modifications are only made to the application code (i.e. inside
-the smaccmpilot-stm32f4 subdirectory) you can invoke make with the flag
-`COMPILER=0`, e.g.,
-
-```
-make COMPILER=0
-```
+The default make target will build the Ivory compiler, runtime verification
+tools, test applications, and the main SMACCMPilot application.  It will also
+run make inside the `smaccmpilot-stm32f4` subdirectory.
 
 ## FreeRTOS
 

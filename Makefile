@@ -5,13 +5,14 @@
 # entire system.  Dependencies will be automatically installed
 # and updated as necessary.
 PACKAGES := smaccmpilot smaccm-gcs-gateway
+export CONFIG_PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
 
 .PHONY: all
 all: smaccmpilot-all
 
 smaccmpilot-all: .cabal-sandbox
 	@cabal install $(PACKAGES)
-	@$(MAKE) -C smaccmpilot-stm32f4
+	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms
 
 .cabal-sandbox: $(MAKEFILE_LIST)
 	@cabal sandbox init

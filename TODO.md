@@ -3,7 +3,7 @@
 ## Pat
 
 - tower/AADL high priority:
-    - unified solution for stable, unique names:
+    - unified solution for stable, unique names: part done
         - create a uniqueness checker to give warnings during aadl output
           rather than the long feedback cycle through the RC aadl toolchain
         - use human-provided names without automatic uniqueness when
@@ -21,7 +21,8 @@
     - flow control: any changes to radio firmware needed for full info?
 
 - smaccm-gcs-gateway:
-    - go back to using pipes
+    - go back to using pipes ?? or track down weird behavior james & lee
+      reported?
     - smaccm-SiK reporting: another socket? just stderr?
     - link managment
         - pack multiple mavlink packets into crypto frame

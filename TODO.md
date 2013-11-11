@@ -2,17 +2,6 @@
 
 ## Pat
 
-- tower/AADL high priority:
-    - unified solution for stable, unique names: part done
-        - create a uniqueness checker to give warnings during aadl output
-          rather than the long feedback cycle through the RC aadl toolchain
-        - use human-provided names without automatic uniqueness when
-          possible and punt the bad names back to the user
-        - smaccmpilot parameter code needs to somehow generate meaningful
-          names. (Should I ask James to look at this, or figure it out myself?)
-    - generate SMACCM\_SYS property set
-        - need someone to send me the canonical version
-
 - smaccm-sik:
     - document issues:
         - we may be close to solving the no-traffic hang, if its related
@@ -32,6 +21,17 @@
     - check radio-status decode for bugs
     - flow control: integrate stream rate scheduler with radio-status
     - pack multiple mavlink packets into crypto frame
+
+- tower/AADL high priority:
+    - unified solution for stable, unique names: part done
+        - create a uniqueness checker to give warnings during aadl output
+          rather than the long feedback cycle through the RC aadl toolchain
+        - use human-provided names without automatic uniqueness when
+          possible and punt the bad names back to the user
+        - smaccmpilot parameter code needs to somehow generate meaningful
+          names. (Should I ask James to look at this, or figure it out myself?)
+    - generate SMACCM\_SYS property set
+        - need someone to send me the canonical version
 
 - tower/AADL lower priority:
     - make sure AADL target is part of jenkins build

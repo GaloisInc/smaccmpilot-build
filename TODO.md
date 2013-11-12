@@ -10,17 +10,15 @@
     - flow control: any changes to radio firmware needed for full info?
 
 - smaccm-gcs-gateway:
-    - go back to using pipes ?? or track down weird behavior james & lee
-      reported?
+    - gateway status MAVLink message to be reported in Mavelous
     - smaccm-SiK reporting: another socket? just stderr?
-    - link managment
-        - pack multiple mavlink packets into crypto frame
+    - link management
         - flow control
+    - go back to using pipes ??
 
 - onboard datalink:
     - check radio-status decode for bugs
     - flow control: integrate stream rate scheduler with radio-status
-    - pack multiple mavlink packets into crypto frame
 
 - tower/AADL high priority:
     - unified solution for stable, unique names: part done
@@ -33,41 +31,44 @@
     - generate SMACCM\_SYS property set
         - need someone to send me the canonical version
 
-- tower/AADL lower priority:
-    - make sure AADL target is part of jenkins build
-    - arbitrary AADL properties per Tower node
+- tower/AADL unknown priority:
     - AADL property output for extern (e.g. apm blob) required semaphores,
       task entrypoints.
         - what is the syntax for this?
         - should I do this, or just leave it to Mike?
 
-- apm blob should be ready for others to work with.
-    - echronos hookup for the isrs:
-        - I2C: i2c2
-        - SPI: just spi1
-        - narrow down exactly which timers are needed?
-    - can we get rid of eeprom? not going to worry about now
-
 - After Nov 31 Drop:
     - test GPS code moving around outdoors, check dop / valid fix threshold
     - test AHRS with GPS integration: spot check? compare to ArduCopter?
 
+- Documentation
+    - Defined behaviors of GCS protocol
+    - Guarantees for what you "can't do"
+
+- need to create wiring harness for the Galois 3dr quad
+
 ## James
 
-- check to make sure HIL flying properly
-
 - altitude hold / throttle controller
-- upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)
-
+- stabilization
+    - bug fix/tune existing stabilization loop
+    - upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)
 - flight tuning 3dr quad
-    - need to create wiring harness for the Galois 3dr quad
 
 ## Lee
 
-- fix the model checker timeouts (program under test is too big now!)
-- fact check & update smaccmpilot.org
-- RV task for commsec messages
-- Ivory model-checker
+- By Nov. drop
+    - MAVLink packing in Commsec
+        - soft vs. hard realtime for heartbeats
+    - code review of commsec
+    - documentation update
+
+- By demo
+    - RV task for commsec messages
+    - Ivory model-checker
+
+- When there's time
+    - fix the model checker timeouts (program under test is too big now!)
 
 ## Tom
 

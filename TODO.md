@@ -3,11 +3,11 @@
 ## Pat
 
 - smaccm-sik:
-    - document issues:
-        - we may be close to solving the no-traffic hang, if its related
-          to buffering
-        - tdm loop hang is 'solved' by watchdog
     - flow control: any changes to radio firmware needed for full info?
+    - document issues:
+        - can no longer reproduce TDM hang or no-traffic hang on a single set of
+          radios with frequency hopping turned off
+        - tdm loop hang is 'solved' by watchdog
 
 - smaccm-gcs-gateway:
     - gateway status MAVLink message to be reported in Mavelous

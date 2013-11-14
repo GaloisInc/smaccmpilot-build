@@ -32,7 +32,7 @@
       radios with frequency hopping turned off
     - tdm loop hang is 'solved' by watchdog
 
-- smaccm-gcs-gateway: 
+- smaccm-gcs-gateway:
     - link management / flow control
     - go back to using pipes ??
 
@@ -69,6 +69,7 @@
 ## Lee
 
 - By Nov. drop
+    - soft vs. hard realtime for heartbeats in GCS?
     - code review of commsec
     - documentation update
 

@@ -2,23 +2,37 @@
 
 ## Pat
 
+### Priority
+
 - smaccm-sik:
-    - flow control: any changes to radio firmware needed for full info?
-    - document issues:
-        - can no longer reproduce TDM hang or no-traffic hang on a single set of
-          radios with frequency hopping turned off
-        - tdm loop hang is 'solved' by watchdog
+    - document, w/ caveat that bugs may exist but we believe it is stable
+    - pack up binary for release
 
 - smaccm-gcs-gateway:
     - gateway status MAVLink message to be reported in Mavelous
-    - smaccm-SiK reporting: another socket? just stderr?
-    - link management
-        - flow control
-    - go back to using pipes ??
 
 - onboard datalink:
     - check radio-status decode for bugs
-    - flow control: integrate stream rate scheduler with radio-status
+    - flow control: integrate stream rate scheduler with radio-status - slow
+      down stream rates if packet loss is high
+
+- Documentation
+    - Defined behaviors of GCS protocol
+    - Guarantees for what you "can't do"
+    - other capabilities of system (alt hold) changes to RC input,
+      parameters, alt hold, etc
+
+### When Time Permits
+
+- smaccm-sik:
+    - flow control: any changes to radio firmware needed for full info?
+    - can no longer reproduce TDM hang or no-traffic hang on a single set of
+      radios with frequency hopping turned off
+    - tdm loop hang is 'solved' by watchdog
+
+- smaccm-gcs-gateway: 
+    - link management / flow control
+    - go back to using pipes ??
 
 - tower/AADL high priority:
     - unified solution for stable, unique names: part done
@@ -41,11 +55,6 @@
     - test GPS code moving around outdoors, check dop / valid fix threshold
     - test AHRS with GPS integration: spot check? compare to ArduCopter?
 
-- Documentation
-    - Defined behaviors of GCS protocol
-    - Guarantees for what you "can't do"
-
-- need to create wiring harness for the Galois 3dr quad
 
 ## James
 

@@ -4,9 +4,6 @@
 
 ### Priority
 
-- gps assertions go off:
-    - see if we can quickly fix, or drop from the build
-
 - mavelous:
     - why is pfd altitude tape borked?
     - radio reporting
@@ -72,8 +69,6 @@
 ## Lee
 
 - By Nov. drop
-    - MAVLink packing in Commsec
-        - soft vs. hard realtime for heartbeats
     - code review of commsec
     - documentation update
 
@@ -96,6 +91,12 @@
 - mavlink command to set target position (APM calls this guided mode)
 
 # Longer term issues:
+
+- Ivory lang bit packing primitives:
+    - needs either packing/unpacking as a primitive
+    - or some sort of complement cast for transforming UintN <-> SintN bitwise
+    - Also need a way to marshal floats & doubles to/fro bytes without the FFI
+    - once done, replace ugly code in device drivers, ffi code in mavlink
 
 - nonvolatile memory backing for parameter code. Probably best to wait until
   a pure ivory/tower impl of EEPROM/FRAM storage so we don't do the same work

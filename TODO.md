@@ -4,12 +4,8 @@
 
 ### Priority
 
-- smaccm-gcs-gateway:
-    - gateway status MAVLink message to be reported in Mavelous
-
-- onboard datalink:
-    - flow control: integrate stream rate scheduler with radio-status - slow
-      down stream rates if packet loss is high
+- gps assertions go off:
+    - see if we can quickly fix, or drop from the build
 
 - mavelous:
     - why is pfd altitude tape borked?
@@ -17,8 +13,9 @@
     - flight mode reporting
     - arm/disarm, flight mode change
 
-- gps assertions go off:
-    - see if we can quickly fix, or drop from the build
+- onboard datalink:
+    - flow control: integrate stream rate scheduler with radio-status - slow
+      down stream rates if packet loss is high
 
 - smaccm-sik:
     - document, w/ caveat that bugs may exist but we believe it is stable

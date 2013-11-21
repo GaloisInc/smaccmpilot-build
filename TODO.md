@@ -62,9 +62,7 @@
 
 - altitude hold / throttle controller
 - stabilization
-    - bug fix/tune existing stabilization loop
     - upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)
-- flight tuning 3dr quad
 
 ## Lee
 

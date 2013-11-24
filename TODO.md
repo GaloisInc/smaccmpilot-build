@@ -4,33 +4,55 @@
 
 ### Priority
 
+- smaccm-sik:
+    - pack up binary for release
+
+- Documentation
+    - todo:
+        - Defined behaviors of GCS MAVLink protocol
+        - preflight checklist page
+        - smaccm-sik page
+
+    - refactoring:
+        - hardware/index needs images
+        - software/apm.md needs reworking a bit, diagram
+        - software/flight-components.md needs lots of editing, diagram, maybe
+          a refactor into subpages
+        - software/flight-overview.md is incorrect about stabilize mode
+        - software/gcs.md could probably use refactoring, a diagram or two
+
+    - hardware pages need content:
+        - standalone quadcopter
+        - rc controller taranis
+        - check d4r-ii ppm behavior
+
+- Flight Behavior Changes:
+    - armed means idle motor outputs: sensible safe default
+    - mode switch on radio: stabilize, alt hold, autonomous.
+        - can only arm in either stabilize mode via hand controller,
+          or autonomous mode via mavlink message
+        - autonomous implies alt hold, and enables control via gamepad
+        - will we be able to get alt hold to handle takeoff in autonomous via
+          gamepad? do we need to add a state detection for on ground vs lifted
+          off?
+
+### When Time Permits
+
 - mavelous:
     - why is pfd altitude tape borked?
     - radio reporting
     - flight mode reporting
     - arm/disarm, flight mode change
 
-- onboard datalink:
-    - flow control: integrate stream rate scheduler with radio-status - slow
-      down stream rates if packet loss is high
-
-- smaccm-sik:
-    - document, w/ caveat that bugs may exist but we believe it is stable
-    - pack up binary for release
-
-- Documentation
-    - Defined behaviors of GCS protocol
-    - Guarantees for what you "can't do"
-    - other capabilities of system (alt hold) changes to RC input,
-      parameters, alt hold, etc
-
-### When Time Permits
-
 - smaccm-sik:
     - flow control: any changes to radio firmware needed for full info?
     - can no longer reproduce TDM hang or no-traffic hang on a single set of
       radios with frequency hopping turned off
     - tdm loop hang is 'solved' by watchdog
+
+- onboard datalink:
+    - flow control: integrate stream rate scheduler with radio-status - slow
+      down stream rates if packet loss is high
 
 - smaccm-gcs-gateway:
     - link management / flow control
@@ -54,8 +76,8 @@
         - should I do this, or just leave it to Mike?
 
 - After Nov 31 Drop:
-    - test GPS code moving around outdoors, check dop / valid fix threshold
-    - test AHRS with GPS integration: spot check? compare to ArduCopter?
+    - GPS check dop / valid fix threshold
+    - AHRS with GPS integration: spot check? compare perf to ArduCopter?
 
 
 ## James

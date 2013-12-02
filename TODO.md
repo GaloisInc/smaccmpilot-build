@@ -4,37 +4,26 @@
 
 ### Priority
 
-- smaccm-sik:
-    - pack up binary for release
-
 - Documentation
     - todo:
         - Defined behaviors of GCS MAVLink protocol
         - preflight checklist page
-        - smaccm-sik page
+        - smaccm-sik page details
 
     - refactoring:
-        - hardware/index needs images
         - software/apm.md needs reworking a bit, diagram
         - software/flight-components.md needs lots of editing, diagram, maybe
           a refactor into subpages
         - software/flight-overview.md is incorrect about stabilize mode
-        - software/gcs.md could probably use refactoring, a diagram or two
+        - software/gcs.md could probably use a diagram or two
 
     - hardware pages need content:
-        - standalone quadcopter
         - rc controller taranis
         - check d4r-ii ppm behavior
+        - add rc controllers to sidebar when complete
 
 - Flight Behavior Changes:
     - armed means idle motor outputs: sensible safe default
-    - mode switch on radio: stabilize, alt hold, autonomous.
-        - can only arm in either stabilize mode via hand controller,
-          or autonomous mode via mavlink message
-        - autonomous implies alt hold, and enables control via gamepad
-        - will we be able to get alt hold to handle takeoff in autonomous via
-          gamepad? do we need to add a state detection for on ground vs lifted
-          off?
 
 ### When Time Permits
 
@@ -82,9 +71,6 @@
 
 ## James
 
-- altitude hold / throttle controller
-- stabilization
-    - upgrade stabilization loop to arducopter 2.9 (or is 3.x different, improved?)
 
 ## Lee
 

@@ -20,6 +20,7 @@ smaccmpilot-all: .cabal-sandbox
 
 sandbox-clean:
 	rm -rf cabal.sandbox.config .cabal-sandbox
+	@find . -name "dist-sandbox-*" | xargs rm -rf
 
 clean:
 	@$(MAKE) -C smaccmpilot-stm32f4 clean

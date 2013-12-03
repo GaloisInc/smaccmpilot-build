@@ -4,7 +4,7 @@
 # List of top-level packages to install when building the
 # entire system.  Dependencies will be automatically installed
 # and updated as necessary.
-PACKAGES := smaccmpilot smaccm-gcs-gateway
+PACKAGES := smaccmpilot smaccm-gcs-gateway ivory-bsp-tests
 export CONFIG_PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
 
 .PHONY: all

@@ -7,15 +7,11 @@
 - Documentation
     - todo:
         - Defined behaviors of GCS MAVLink protocol
-        - preflight checklist page
-        - smaccm-sik page details
 
     - refactoring:
-        - software/apm.md needs reworking a bit, diagram
-        - software/flight-components.md needs lots of editing, diagram, maybe
-          a refactor into subpages
-        - software/flight-overview.md is incorrect about stabilize mode
+        - software/flight-components.md needs some content, diagram
         - software/gcs.md could probably use a diagram or two
+        - software/gcs-gamepad.md sharley making a diagram
 
     - hardware pages need content:
         - rc controller taranis
@@ -24,14 +20,32 @@
 
 - Flight Behavior Changes:
     - armed means idle motor outputs: sensible safe default
+    - flightmode refactored into fields:
+        - armed              ::= safe | disarmed | armed
+        - stabilizer control ::= ppm  | mavlink  | auto
+        - throttle control   ::= ppm  | autothrottle
+        - autothrottle ctl   ::= ppm  | mavlink  | auto
+
+- GPS position hold
+    - GPS check dop / valid fix threshold
+    - AHRS with GPS integration: spot check? compare perf to ArduCopter?
+    - accelerometer, gyro, magnetometer calibration needs to be improved,
+    - Build position/velocity estimator using GPS position, GPS velocity,
+      accelerometer
+    - control velocity via stabilizer user input, control position with velocity
+
+- tower/AADL high priority:
+    - unified solution for stable, unique names: part done
+        - create a uniqueness checker to give warnings during aadl output
+          rather than the long feedback cycle through the RC aadl toolchain
+        - use human-provided names without automatic uniqueness when
+          possible and punt the bad names back to the user
+        - smaccmpilot parameter code needs to somehow generate meaningful
+          names. (Should I ask James to look at this, or figure it out myself?)
+    - generate SMACCM\_SYS property set
+        - need someone to send me the canonical version
 
 ### When Time Permits
-
-- mavelous:
-    - why is pfd altitude tape borked?
-    - radio reporting
-    - flight mode reporting
-    - arm/disarm, flight mode change
 
 - smaccm-sik:
     - flow control: any changes to radio firmware needed for full info?
@@ -47,16 +61,6 @@
     - link management / flow control
     - go back to using pipes ??
 
-- tower/AADL high priority:
-    - unified solution for stable, unique names: part done
-        - create a uniqueness checker to give warnings during aadl output
-          rather than the long feedback cycle through the RC aadl toolchain
-        - use human-provided names without automatic uniqueness when
-          possible and punt the bad names back to the user
-        - smaccmpilot parameter code needs to somehow generate meaningful
-          names. (Should I ask James to look at this, or figure it out myself?)
-    - generate SMACCM\_SYS property set
-        - need someone to send me the canonical version
 
 - tower/AADL unknown priority:
     - AADL property output for extern (e.g. apm blob) required semaphores,
@@ -64,9 +68,12 @@
         - what is the syntax for this?
         - should I do this, or just leave it to Mike?
 
-- After Nov 31 Drop:
-    - GPS check dop / valid fix threshold
-    - AHRS with GPS integration: spot check? compare perf to ArduCopter?
+
+- mavelous:
+    - why is pfd altitude tape borked?
+    - radio reporting
+    - flight mode reporting
+    - arm/disarm, flight mode change
 
 
 ## James
@@ -93,7 +100,6 @@
 
 ## Anyone
 
-- sensor fusion: inertial sensors with position (APM calls this AP_InertialNav)
 - loiter position hold controller
 - mavlink command to set target position (APM calls this guided mode)
 
@@ -108,10 +114,6 @@
 - nonvolatile memory backing for parameter code. Probably best to wait until
   a pure ivory/tower impl of EEPROM/FRAM storage so we don't do the same work
   twice
-
-- smaccmpilot.org software documentation
-    - latest work on standalone_apahrs, tower, parameters, datalink, etc etc
-    - give it a twice over before Jan 14 PI meeting but just let it decay in the meantime
 
 - haddock documentation:
     - tower

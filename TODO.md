@@ -5,14 +5,7 @@
 ### Priority
 
 - Documentation
-    - todo:
-        - Defined behaviors of GCS MAVLink protocol
-
-    - refactoring:
-        - software/flight-components.md needs some content, diagram
-        - software/gcs.md could probably use a diagram or two
-        - software/gcs-gamepad.md sharley making a diagram
-
+    - software/flight-components.md needs some content, diagram
     - hardware pages need content:
         - rc controller taranis
         - check d4r-ii ppm behavior
@@ -36,12 +29,9 @@
 
 - tower/AADL high priority:
     - unified solution for stable, unique names: part done
-        - create a uniqueness checker to give warnings during aadl output
-          rather than the long feedback cycle through the RC aadl toolchain
-        - use human-provided names without automatic uniqueness when
-          possible and punt the bad names back to the user
-        - smaccmpilot parameter code needs to somehow generate meaningful
-          names. (Should I ask James to look at this, or figure it out myself?)
+        - need to support scopes for names introduced in featureDef
+    - smaccmpilot parameter code needs to somehow generate meaningful
+      names. (Should I ask James to look at this, or figure it out myself?)
     - generate SMACCM\_SYS property set
         - need someone to send me the canonical version
 
@@ -61,13 +51,11 @@
     - link management / flow control
     - go back to using pipes ??
 
-
 - tower/AADL unknown priority:
     - AADL property output for extern (e.g. apm blob) required semaphores,
       task entrypoints.
         - what is the syntax for this?
         - should I do this, or just leave it to Mike?
-
 
 - mavelous:
     - why is pfd altitude tape borked?
@@ -75,33 +63,16 @@
     - flight mode reporting
     - arm/disarm, flight mode change
 
-
-## James
-
-
 ## Lee
 
-- By Nov. drop
-    - soft vs. hard realtime for heartbeats in GCS?
-    - code review of commsec
-    - documentation update
-
-- By demo
+- for demo:
     - RV task for commsec messages
     - Ivory model-checker
-
-- When there's time
-    - fix the model checker timeouts (program under test is too big now!)
 
 ## Tom
 
 - commsec documentation (specification)
     - including keying arrangement for wider adoption
-
-## Anyone
-
-- loiter position hold controller
-- mavlink command to set target position (APM calls this guided mode)
 
 # Longer term issues:
 
@@ -126,6 +97,7 @@
     - internally, change to trees instead of lists of Nodes/dataports/channels
 
 ## Pixhawk HW platform
+
 - separate sensor IO from AP_AHRS sensor fusion; elimintate AP_HAL completely from AP_AHRS
     - AP_Scheduler depends on gnarly HWF4 timer code, which is also directly
       connected to RCInput ppm timer. So, first move that functionality out

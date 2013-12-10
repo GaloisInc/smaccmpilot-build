@@ -16,7 +16,7 @@ smaccmpilot-all: .cabal-sandbox
 
 .cabal-sandbox: $(MAKEFILE_LIST)
 	@cabal sandbox init
-	@cabal sandbox add-source `find . -name "*.cabal" -printf "%h\n"`
+	@cabal sandbox add-source `find . -name "*.cabal" -exec dirname {} \;`
 
 sandbox-clean:
 	rm -rf cabal.sandbox.config .cabal-sandbox

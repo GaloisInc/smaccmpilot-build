@@ -4,13 +4,6 @@
 
 ### Priority
 
-- Documentation
-    - software/flight-components.md needs some content, diagram
-    - hardware pages need content:
-        - rc controller taranis
-        - check d4r-ii ppm behavior
-        - add rc controllers to sidebar when complete
-
 - Flight Behavior Changes:
     - armed means idle motor outputs: sensible safe default
     - flightmode refactored into fields:
@@ -27,13 +20,14 @@
       accelerometer
     - control velocity via stabilizer user input, control position with velocity
 
-- tower/AADL high priority:
-    - unified solution for stable, unique names: part done
-        - need to support scopes for names introduced in featureDef
-    - smaccmpilot parameter code needs to somehow generate meaningful
-      names. (Should I ask James to look at this, or figure it out myself?)
-    - generate SMACCM\_SYS property set
-        - need someone to send me the canonical version
+- Documentation
+    - software/flight-components.md needs some content, finish up diagram
+    - add gamepad diagram
+    - go through and audit broken markdown links
+    - hardware pages need content:
+        - rc controller taranis
+        - check d4r-ii ppm behavior
+        - add rc controllers to sidebar when complete
 
 ### When Time Permits
 
@@ -81,6 +75,10 @@
     - or some sort of complement cast for transforming UintN <-> SintN bitwise
     - Also need a way to marshal floats & doubles to/fro bytes without the FFI
     - once done, replace ugly code in device drivers, ffi code in mavlink
+
+- lang/bitdata bug in SPI code
+    - not used by flight code yet
+    - not obviously user error, is the lang doing something wrong here?
 
 - nonvolatile memory backing for parameter code. Probably best to wait until
   a pure ivory/tower impl of EEPROM/FRAM storage so we don't do the same work

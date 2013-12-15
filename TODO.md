@@ -4,13 +4,7 @@
 
 ### Priority
 
-- Flight Behavior Changes:
-    - armed means idle motor outputs: sensible safe default
-    - flightmode refactored into fields:
-        - armed              ::= safe | disarmed | armed
-        - stabilizer control ::= ppm  | mavlink  | auto
-        - throttle control   ::= ppm  | autothrottle
-        - autothrottle ctl   ::= ppm  | mavlink  | auto
+SEND EMAIL ALERTING USERS TO ARMED => MOTORS SPINNING AT IDLE THROTTLE
 
 - GPS position hold
     - GPS check dop / valid fix threshold
@@ -19,6 +13,15 @@
     - Build position/velocity estimator using GPS position, GPS velocity,
       accelerometer
     - control velocity via stabilizer user input, control position with velocity
+
+- fixups:
+    - gcs.transmit.messagedriver: GRI, GPI fixes
+    - gcs.receive.handlers: everything for mode input is wrong
+    - userinput.ppm.modeswitch: debouncing, failure logic
+
+    - commsec.decrypt: report bad messages
+    - datalink: radio_stat is total nonsense, either fix it or remove it
+    - datarate reporting: fix or remove. type, gcs receive, gcs transmit...
 
 - Documentation
     - software/flight-components.md needs some content, finish up diagram

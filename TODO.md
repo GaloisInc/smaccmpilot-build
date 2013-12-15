@@ -4,8 +4,6 @@
 
 ### Priority
 
-SEND EMAIL ALERTING USERS TO ARMED => MOTORS SPINNING AT IDLE THROTTLE
-
 - GPS position hold
     - GPS check dop / valid fix threshold
     - AHRS with GPS integration: spot check? compare perf to ArduCopter?
@@ -15,9 +13,7 @@ SEND EMAIL ALERTING USERS TO ARMED => MOTORS SPINNING AT IDLE THROTTLE
     - control velocity via stabilizer user input, control position with velocity
 
 - fixups:
-    - gcs.transmit.messagedriver: GRI, GPI fixes
-    - gcs.receive.handlers: everything for mode input is wrong
-    - userinput.ppm.modeswitch: debouncing, failure logic
+    - userinput.ppm.modeswitch: debouncing, failure logic?
 
     - commsec.decrypt: report bad messages
     - datalink: radio_stat is total nonsense, either fix it or remove it

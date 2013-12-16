@@ -61,6 +61,17 @@
 - for demo:
     - RV task for commsec messages
     - Ivory model-checker
+    - Audit Frama-c (potential) bugs
+
+- Ivory issues (w/ help from Trevor)
+    - Fix naming soundness issue (Template Haskell)
+    - Insert checks for left/right shifts
+
+- Ivory paper
+    - Define semantics
+
+- Deprecate/remove CBMC stuff
+
 
 ## Tom
 

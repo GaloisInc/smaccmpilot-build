@@ -10,10 +10,10 @@ export CONFIG_PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
 .PHONY: all
 all: smaccmpilot-all
 
-# Currently, EXTRA_FLAGS can be werror, passing -Werror to GHC, or debug-qq, to
+# Currently, EXTRA_FLAGS can be -fwerror, passing -Werror to GHC, or -fdebug-qq, to
 # debug the quasiquoter.
 smaccmpilot-all: .cabal-sandbox
-	cabal install --flags="$(EXTRA_FLAGS)" $(PACKAGES)
+	@cabal install $(EXTRA_FLAGS) $(PACKAGES)
 	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms
 
 .cabal-sandbox: $(MAKEFILE_LIST)

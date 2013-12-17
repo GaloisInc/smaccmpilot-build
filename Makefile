@@ -1,4 +1,4 @@
-# -*- Mode: makefile-gmake; indent-tabs-mode: t; tab-width: 8 -*-
+# -*- Mode: makefile-gmake; indent-tabs-mode: t; tab-width: 2 -*-
 # please use tabs (8 width)
 
 # List of top-level packages to install when building the
@@ -10,8 +10,10 @@ export CONFIG_PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
 .PHONY: all
 all: smaccmpilot-all
 
+# Currently, EXTRA_FLAGS can be werror, passing -Werror to GHC, or debug-qq, to
+# debug the quasiquoter.
 smaccmpilot-all: .cabal-sandbox
-	@cabal install $(PACKAGES) --ghc-options=$(GHC_OPTS)
+	cabal install --flags="$(EXTRA_FLAGS)" $(PACKAGES)
 	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms
 
 .cabal-sandbox: $(MAKEFILE_LIST)

@@ -79,6 +79,8 @@
     - including keying arrangement for wider adoption
 
 # Longer term issues:
+- Haskell Mavlink generator.
+  - Use it for current messages (e.g., GCS Radio).
 
 - Ivory lang bit packing primitives:
     - needs either packing/unpacking as a primitive
@@ -114,8 +116,3 @@
     - Rewrite all FMU17 uses of hwf4 SPI and I2C in terms of
       ivory-stm32f4-bsp, as general-purpose library code in ivory-px4-hardware
 - implement sensor IO in Ivory for Pixhawk, port exisiting ppm/pwm code
-
-# Goals
-
-- Ivory and Tower should Help A Lot Of People
-

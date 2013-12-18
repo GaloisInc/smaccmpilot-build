@@ -13,9 +13,6 @@
 [submodule "ivory-rtverification"]
 	path = ivory-rtverification
 	url = https://github.com/GaloisInc/ivory-rtverification.git
-[submodule "simple-spreadsheet-tools"]
-	path = simple-spreadsheet-tools
-	url = https://github.com/leepike/simple-spreadsheet-tools.git
 [submodule "cbmc-reporter"]
 	path = cbmc-reporter
 	url = https://github.com/GaloisInc/cbmc-reporter.git

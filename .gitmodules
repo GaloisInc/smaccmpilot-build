@@ -13,9 +13,6 @@
 [submodule "ivory-rtverification"]
 	path = ivory-rtverification
 	url = https://github.com/GaloisInc/ivory-rtverification.git
-[submodule "cbmc-reporter"]
-	path = cbmc-reporter
-	url = https://github.com/GaloisInc/cbmc-reporter.git
 [submodule "smaccmpilot-SiK"]
 	path = smaccmpilot-SiK
 	url = https://github.com/GaloisInc/smaccmpilot-SiK.git

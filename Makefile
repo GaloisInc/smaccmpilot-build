@@ -4,8 +4,8 @@
 # List of top-level packages to install when building the
 # entire system.  Dependencies will be automatically installed
 # and updated as necessary.
-PACKAGES := smaccmpilot smaccm-gcs-gateway ivory-bsp-tests
 export CONFIG_PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
+PACKAGES := $(shell find . -name "*.cabal" -exec dirname {} \;)
 
 .PHONY: all
 all: smaccmpilot-all
@@ -18,11 +18,11 @@ smaccmpilot-all: .cabal-sandbox
 
 .cabal-sandbox: $(MAKEFILE_LIST)
 	@cabal sandbox init
-	@cabal sandbox add-source `find . -name "*.cabal" -exec dirname {} \;`
+	@cabal sandbox add-source $(PACKAGES)
 
 sandbox-clean:
 	rm -rf cabal.sandbox.config .cabal-sandbox
-	@find . -name "dist-sandbox-*" | xargs rm -rf
+	find . -name "dist" | xargs rm -rf
 
 clean:
 	@$(MAKE) -C smaccmpilot-stm32f4 clean

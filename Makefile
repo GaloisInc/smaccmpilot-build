@@ -1,11 +1,15 @@
 # -*- Mode: makefile-gmake; indent-tabs-mode: t; tab-width: 2 -*-
 # please use tabs (8 width)
 
+-include Config.mk
 # List of top-level packages to install when building the
 # entire system.  Dependencies will be automatically installed
 # and updated as necessary.
+#
 export CONFIG_PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
-PACKAGES := $(shell find . -name "*.cabal" -exec dirname {} \;)
+
+ALL_CABAL_PKGS := $(shell find . -name "*.cabal" -exec dirname {} \;)
+PACKAGES ?= $(ALL_CABAL_PKGS)
 
 .PHONY: all
 all: smaccmpilot-all
@@ -18,7 +22,7 @@ smaccmpilot-all: .cabal-sandbox
 
 .cabal-sandbox: $(MAKEFILE_LIST)
 	@cabal sandbox init
-	@cabal sandbox add-source $(PACKAGES)
+	@cabal sandbox add-source $(ALL_CABAL_PKGS)
 
 sandbox-clean:
 	rm -rf cabal.sandbox.config .cabal-sandbox

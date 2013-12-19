@@ -19,3 +19,6 @@
 [submodule "smaccmpilot-gcs-gateway"]
 	path = smaccmpilot-gcs-gateway
 	url = https://github.com/GaloisInc/smaccmpilot-gcs-gateway
+[submodule "mavlink"]
+	path = mavlink
+	url = https://github.com/GaloisInc/mavlink.git

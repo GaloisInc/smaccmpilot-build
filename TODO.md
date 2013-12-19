@@ -43,6 +43,7 @@
 - smaccm-gcs-gateway:
     - link management / flow control
     - go back to using pipes ??
+    - set MAVLink message stream rates separately
 
 - tower/AADL unknown priority:
     - AADL property output for extern (e.g. apm blob) required semaphores,
@@ -69,9 +70,6 @@
 
 - Ivory paper
     - Define semantics
-
-- Deprecate/remove CBMC stuff
-
 
 ## Tom
 

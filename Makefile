@@ -6,7 +6,9 @@
 # entire system.  Dependencies will be automatically installed
 # and updated as necessary.
 #
-export CONFIG_PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
+
+PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
+export CONFIG_PLATFORMS ?= $(PLATFORMS)
 
 ALL_CABAL_PKGS := $(shell find . -name "*.cabal" -exec dirname {} \;)
 PACKAGES ?= $(ALL_CABAL_PKGS)

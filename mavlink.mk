@@ -58,7 +58,7 @@ $(SMAVLINK_CABAL): $(MAVLINK_GCS)
 	@echo "*****************************************************************"
 	@echo "smaccm-mavlink library regenerated. Be sure to put new .hs"
 	@echo "files generated from new messages under version control."
-  @echo "Ignore this message if you have not defined new MAVLink messages"
+	@echo "Ignore this message if you have not defined new MAVLink messages"
 	@echo "*****************************************************************"
 	@echo
 

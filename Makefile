@@ -2,10 +2,6 @@
 # please use tabs (8 width)
 
 -include Config.mk
-# List of top-level packages to install when building the
-# entire system.  Dependencies will be automatically installed
-# and updated as necessary.
-#
 
 PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
 export CONFIG_PLATFORMS ?= $(PLATFORMS)
@@ -16,9 +12,11 @@ PACKAGES ?= $(ALL_CABAL_PKGS)
 .PHONY: all
 all: smaccmpilot-all
 
+include mavlink.mk
+
 # Currently, EXTRA_FLAGS can be -fwerror, passing -Werror to GHC, or -fdebug-qq, to
 # debug the quasiquoter.
-smaccmpilot-all: .cabal-sandbox
+smaccmpilot-all: .cabal-sandbox $(SMAVLINK_CABAL)
 	@cabal install $(EXTRA_FLAGS) $(PACKAGES)
 	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms
 
@@ -31,6 +29,7 @@ sandbox-clean:
 	find . -name "dist" | xargs rm -rf
 
 clean:
-	@$(MAKE) -C smaccmpilot-stm32f4 clean
+	$(MAKE) -C smaccmpilot-stm32f4 clean
 	@echo "Clean in the top level does not remove your cabal sandbox."
 	@echo "If you want to remove your cabal sandbox, use the 'sandbox-clean' target"
+

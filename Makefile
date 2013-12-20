@@ -16,11 +16,11 @@ include mavlink.mk
 
 # Currently, EXTRA_FLAGS can be -fwerror, passing -Werror to GHC, or -fdebug-qq, to
 # debug the quasiquoter.
-smaccmpilot-all: .cabal-sandbox $(SMAVLINK_CABAL)
+smaccmpilot-all: .cabal-sandbox
 	@cabal install $(EXTRA_FLAGS) $(PACKAGES)
 	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms
 
-.cabal-sandbox: $(MAKEFILE_LIST)
+.cabal-sandbox: $(MAKEFILE_LIST) $(SMAVLINK_CABAL)
 	@cabal sandbox init
 	@cabal sandbox add-source $(ALL_CABAL_PKGS)
 

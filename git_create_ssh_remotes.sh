@@ -6,10 +6,11 @@ git fetch origin-ssh
 for SUBMOD in \
   cbmc-reporter              \
   ivory ivory-rtverification \
-	simple-spreadsheet-tools   \
-	smaccmpilot-SiK            \
+  simple-spreadsheet-tools   \
+  smaccmpilot-SiK            \
   smaccmpilot-stm32f4        \
   smaccmpilot-gcs-gateway    \
+  mavlink \
   tower
 do
 	cd $SUBMOD
@@ -17,9 +18,4 @@ do
 	git fetch origin-ssh
 	cd -
 done
-
-cd smaccmpilot-stm32f4/src/gcs/mavlink
-git remote add origin-ssh git@github.com:GaloisInc/mavlink.git
-git fetch origin-ssh
-cd -
 

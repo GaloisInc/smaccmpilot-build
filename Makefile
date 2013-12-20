@@ -6,7 +6,10 @@
 PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
 export CONFIG_PLATFORMS ?= $(PLATFORMS)
 
-ALL_CABAL_PKGS := $(shell find . -name "*.cabal" -exec dirname {} \;)
+# Important: this should be defined with '=', not ':='.  This is because we may
+# generate ...smacm-mavlink/smaccm-mavlink.cabal (SMAVLINK_CABAL target), so
+# this variable needs to be determined at use time.
+ALL_CABAL_PKGS = $(shell find . -name "*.cabal" -exec dirname {} \;)
 PACKAGES ?= $(ALL_CABAL_PKGS)
 
 .PHONY: all

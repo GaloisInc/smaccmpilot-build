@@ -4,6 +4,11 @@
 
 ### Priority
 
+- params:
+    - rename & fixup saved files with new naming conventions
+    - or just get rid of them completely with platform polymorphic defaults
+    - update documentation
+
 - GPS position hold
     - GPS check dop / valid fix threshold
     - AHRS with GPS integration: spot check? compare perf to ArduCopter?

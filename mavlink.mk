@@ -21,8 +21,6 @@ MAVLINK_DEPS				:= $(MAVLINK_MSG_DEFS)/smaccmpilot.xml \
                        $(MAVLINK_MSG_DEFS)/common.xml
 
 MAVLINK_GCS					:= $(MAVLINK_DIR)/pymavlink/mavlinkv10.py
-MAVLINK_SMACCM			:= \
-  $(wildcard $(SMACCM_MAVLINK_DIR)/src/SMACCMPilot/Mavlink/Messages/*.hs)
 
 GCS_SCRIPT          := \
 	@python ./$(MAVLINK_DIR)/pymavlink/generator/mavgen.py \
@@ -40,7 +38,10 @@ SMACCM_SCRIPT      := \
 	 	-o ./$(SMACCM_MAVLINK_DIR)/src/SMACCMPilot/Mavlink/ \
 	 	$(MAVLINK_MSG_DEFS)/smaccmpilot.xml
 
-$(MAVLINK_SMACCM): $(MAVLINK_GCS) $(MAVLINK_DEPS)
+SMAVLINK_MSGS_HS := \
+  $(wildcard $(SMACCM_MAVLINK_DIR)/src/SMACCMPilot/Mavlink/Messages/*.hs)
+
+$(SMAVLINK_MSGS_HS): $(MAVLINK_GCS) $(MAVLINK_DEPS)
 	$(SMACCM_SCRIPT)
 	@touch $@
 
@@ -50,10 +51,10 @@ COMMA := ,
 
 SMAV_MODULES := $(patsubst %.hs, \
                   SMACCMPilot.Mavlink.Messages.%$(COMMA), \
-                  $(notdir $(MAVLINK_SMACCM)))
+                  $(notdir $(SMAVLINK_MSGS_HS)))
 
 $(SMAVLINK_CABAL): $(SMAVLINK_CABAL).in
-$(SMAVLINK_CABAL): $(MAVLINK_SMACCM)
+$(SMAVLINK_CABAL): $(SMAVLINK_MSGS_HS)
 $(SMAVLINK_CABAL): $(MAVLINK_DEPS)
 $(SMAVLINK_CABAL): $(MAVLINK_GCS)
 	@echo "  GEN      $@"

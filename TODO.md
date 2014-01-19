@@ -4,24 +4,6 @@
 
 ### Priority
 
-- params:
-    - rename & fixup saved files with new naming conventions
-    - or just get rid of them completely with platform polymorphic defaults
-    - update documentation
-
-- GPS position hold
-    - GPS check dop / valid fix threshold
-    - AHRS with GPS integration: spot check? compare perf to ArduCopter?
-    - accelerometer, gyro, magnetometer calibration needs to be improved,
-    - Build position/velocity estimator using GPS position, GPS velocity,
-      accelerometer
-    - control velocity via stabilizer user input, control position with velocity
-
-- fixups:
-    - userinput.ppm.modeswitch: debouncing, failure logic?
-    - datalink: radio_stat is total nonsense, either fix it or remove it
-    - datarate reporting: fix or remove. type, gcs receive, gcs transmit...
-
 - Documentation
     - software/flight-components.md needs some content, finish up diagram
     - add gamepad diagram
@@ -32,7 +14,18 @@
         - add rc controllers to sidebar when complete
     - check & push tom's commsec documentation
 
+    - params
+    - navigation
+    - gamepad button functionality
+
 ### When Time Permits
+
+- fixups:
+    - datalink: radio_stat is total nonsense, either fix it or remove it
+
+- params:
+    - platform polymorphic defaults
+
 
 - smaccm-sik:
     - flow control: any changes to radio firmware needed for full info?

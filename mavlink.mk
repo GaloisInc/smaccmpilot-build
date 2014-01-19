@@ -21,23 +21,29 @@ MAVLINK_DEPS				:= $(MAVLINK_MSG_DEFS)/smaccmpilot.xml \
                        $(MAVLINK_MSG_DEFS)/common.xml
 
 MAVLINK_GCS					:= $(MAVLINK_DIR)/pymavlink/mavlinkv10.py
-MAVLINK_SMACCM			:= \
-  $(wildcard $(SMACCM_MAVLINK_DIR)/src/SMACCMPilot/Mavlink/Messages/*.hs)
 
-$(MAVLINK_GCS): $(MAVLINK_DEPS)
+GCS_SCRIPT          := \
 	@python ./$(MAVLINK_DIR)/pymavlink/generator/mavgen.py \
         --lang=python \
         --wire-protocol=1.0 \
         --output=./$(MAVLINK_DIR)/pymavlink/mavlinkv10.py \
         ./$(MAVLINK_MSG_DEFS)/smaccmpilot.xml
 
-$(MAVLINK_SMACCM): $(MAVLINK_GCS) $(MAVLINK_DEPS)
+$(MAVLINK_GCS): $(MAVLINK_DEPS)
+	$(GCS_SCRIPT)
+
+SMACCM_SCRIPT      := \
 	@python \
     $(SMACCM_MAVLINK_DIR)/ivory-module-generator/pymavlink/generator/smavgen.py \
 	 	-o ./$(SMACCM_MAVLINK_DIR)/src/SMACCMPilot/Mavlink/ \
 	 	$(MAVLINK_MSG_DEFS)/smaccmpilot.xml
-	@touch $@
 
+SMAVLINK_MSGS_HS := \
+  $(wildcard $(SMACCM_MAVLINK_DIR)/src/SMACCMPilot/Mavlink/Messages/*.hs)
+
+$(SMAVLINK_MSGS_HS): $(MAVLINK_GCS) $(MAVLINK_DEPS)
+	$(SMACCM_SCRIPT)
+	@touch $@
 
 SMAVLINK_CABAL := $(SMACCM_MAVLINK_DIR)/smaccm-mavlink.cabal
 
@@ -45,10 +51,10 @@ COMMA := ,
 
 SMAV_MODULES := $(patsubst %.hs, \
                   SMACCMPilot.Mavlink.Messages.%$(COMMA), \
-                  $(notdir $(MAVLINK_SMACCM)))
+                  $(notdir $(SMAVLINK_MSGS_HS)))
 
 $(SMAVLINK_CABAL): $(SMAVLINK_CABAL).in
-$(SMAVLINK_CABAL): $(MAVLINK_SMACCM)
+$(SMAVLINK_CABAL): $(SMAVLINK_MSGS_HS)
 $(SMAVLINK_CABAL): $(MAVLINK_DEPS)
 $(SMAVLINK_CABAL): $(MAVLINK_GCS)
 	@echo "  GEN      $@"
@@ -61,5 +67,11 @@ $(SMAVLINK_CABAL): $(MAVLINK_GCS)
 	@echo "Ignore this message if you have not defined new MAVLink messages"
 	@echo "*****************************************************************"
 	@echo
+
+# Phony target to force build.
+.PHONY: mavlink
+mavlink:
+	$(GCS_SCRIPT)
+	$(SMACCM_SCRIPT)
 
 # vim: set ft=make noet ts=2:

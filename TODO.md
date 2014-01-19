@@ -19,8 +19,6 @@
 
 - fixups:
     - userinput.ppm.modeswitch: debouncing, failure logic?
-
-    - commsec.decrypt: report bad messages
     - datalink: radio_stat is total nonsense, either fix it or remove it
     - datarate reporting: fix or remove. type, gcs receive, gcs transmit...
 
@@ -32,6 +30,7 @@
         - rc controller taranis
         - check d4r-ii ppm behavior
         - add rc controllers to sidebar when complete
+    - check & push tom's commsec documentation
 
 ### When Time Permits
 
@@ -76,10 +75,6 @@
 - Ivory paper
     - Define semantics
 
-## Tom
-
-- commsec documentation (specification)
-    - including keying arrangement for wider adoption
 
 # Longer term issues:
 - Haskell Mavlink generator.
@@ -119,3 +114,5 @@
     - Rewrite all FMU17 uses of hwf4 SPI and I2C in terms of
       ivory-stm32f4-bsp, as general-purpose library code in ivory-px4-hardware
 - implement sensor IO in Ivory for Pixhawk, port exisiting ppm/pwm code
+- PX4IOv2 driver for IO expansion
+    - when time permits, rewrite IOv2 SW in Ivory too

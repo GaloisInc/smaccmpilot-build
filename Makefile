@@ -12,15 +12,21 @@ export CONFIG_PLATFORMS ?= $(PLATFORMS)
 ALL_CABAL_PKGS = $(shell find . -name "*.cabal" -exec dirname {} \;)
 PACKAGES ?= $(ALL_CABAL_PKGS)
 
+DEFAULT_TARGET ?= smaccmpilot-all
+
 .PHONY: all
-all: smaccmpilot-all
+all: $(DEFAULT_TARGET)
 
 include mavlink.mk
 
+smaccmpilot-all: cabal-build c-build
+
 # Currently, EXTRA_FLAGS can be -fwerror, passing -Werror to GHC, or -fdebug-qq, to
 # debug the quasiquoter.
-smaccmpilot-all: .cabal-sandbox
+cabal-build: .cabal-sandbox
 	@cabal install $(EXTRA_FLAGS) $(PACKAGES)
+
+c-build: cabal-build
 	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms
 
 .cabal-sandbox: $(MAKEFILE_LIST) $(SMAVLINK_CABAL)

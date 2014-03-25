@@ -1,6 +1,9 @@
 # -*- Mode: makefile-gmake; indent-tabs-mode: t; tab-width: 2 -*-
 # please use tabs (8 width)
 
+# Set warnings as errors by default.  Modify this in your Config.mk.
+GHC_FLAGS := -Werror
+
 -include Config.mk
 
 PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
@@ -21,10 +24,9 @@ include mavlink.mk
 
 smaccmpilot-all: cabal-build c-build
 
-# Currently, EXTRA_FLAGS can be -fwerror, passing -Werror to GHC, or -fdebug-qq, to
-# debug the quasiquoter.
+# Currently, EXTRA_FLAGS can be -fdebug-qq, to debug the quasiquoter.
 cabal-build: .cabal-sandbox
-	@cabal install $(EXTRA_FLAGS) $(PACKAGES)
+	cabal install --ghc-options=$(GHC_FLAGS) $(EXTRA_FLAGS) $(PACKAGES)
 
 c-build: cabal-build
 	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms

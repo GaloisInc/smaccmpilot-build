@@ -6,6 +6,12 @@ GHC_FLAGS := -Werror
 
 -include Config.mk
 
+ifeq ($(strip $(GHC_FLAGS)),)
+GHC_OPTS =
+else
+GHC_OPTS = --ghc-options=$(GHC_FLAGS)
+endif
+
 PLATFORMS := px4fmu17_ioar_freertos,px4fmu17_ioar_aadl
 export CONFIG_PLATFORMS ?= $(PLATFORMS)
 
@@ -26,7 +32,7 @@ smaccmpilot-all: cabal-build c-build
 
 # Currently, EXTRA_FLAGS can be -fdebug-qq, to debug the quasiquoter.
 cabal-build: .cabal-sandbox
-	cabal install --ghc-options=$(GHC_FLAGS) $(EXTRA_FLAGS) $(PACKAGES)
+	cabal install $(GHC_OPTS) $(EXTRA_FLAGS) $(PACKAGES)
 
 c-build: cabal-build
 	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms

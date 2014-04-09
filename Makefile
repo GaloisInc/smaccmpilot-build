@@ -2,6 +2,7 @@
 # please use tabs (8 width)
 
 # Set warnings as errors by default.  Modify this in your Config.mk.
+# GHC_FLAGS := -Werror
 GHC_FLAGS := -Werror
 
 -include Config.mk

@@ -38,8 +38,9 @@ c-build: cabal-build
 	@$(MAKE) -C smaccmpilot-stm32f4 allplatforms
 
 .cabal-sandbox: $(MAKEFILE_LIST) $(SMAVLINK_CABAL)
-	@cabal sandbox init
-	@cabal sandbox add-source $(ALL_CABAL_PKGS)
+	cabal sandbox init
+	cabal sandbox add-source $(ALL_CABAL_PKGS)
+	cabal install --only-dep $(ALL_CABAL_PKGS)
 
 sandbox-clean:
 	rm -rf cabal.sandbox.config .cabal-sandbox

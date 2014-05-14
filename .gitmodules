@@ -25,3 +25,6 @@
 [submodule "language-c-quote"]
 	path = language-c-quote
 	url = https://github.com/pchickey/language-c-quote
+[submodule "exception-transformers"]
+	path = exception-transformers
+	url = https://github.com/GaloisInc/exception-transformers.git

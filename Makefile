@@ -40,7 +40,7 @@ smaccmpilot-all: cabal-build c-build
 cabal-build: .cabal-sandbox
 	cabal sandbox add-source $(ALL_CABAL_PKGS)
 	# Make the top-level cabal package.
-	cabal install $(GHC_OPTS) $(EXTRA_FLAGS)
+	cabal install $(GHC_OPTS) $(EXTRA_FLAGS) $(ALL_CABAL_PKGS)
 
 .cabal-sandbox: $(MAKEFILE_LIST) $(SMAVLINK_CABAL)
 	cabal sandbox init

@@ -3,18 +3,8 @@
 
 ## Build/OS
 
-- SCB, Flash peripherals need register & peripheral defs filled out
-- Startup SCB, RCC, Flash initialization code
-
-- generalize STM32F4:
-    - F405 peripherals
-    - F427 peripherals
-
-- generalize STM32:
-    - Common peripheral drivers
-    - F103 peripheral drivers
-    - F4xx peripheral drivers
-
+- F427 peripherals
+- F103 peripheral drivers
 - CortexM3 support from FreeRTOS & build system
 
 ## Drivers

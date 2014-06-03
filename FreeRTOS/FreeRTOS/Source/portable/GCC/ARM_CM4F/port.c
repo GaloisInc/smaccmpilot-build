@@ -126,9 +126,9 @@ void vPortSetupTimerInterrupt( void );
 /*
  * Exception handlers.
  */
-void xPortPendSVHandler( void ) __attribute__ (( naked ));
-void xPortSysTickHandler( void );
-void vPortSVCHandler( void ) __attribute__ (( naked ));
+void PendSV_Handler( void ) __attribute__ (( naked ));
+void SysTick_Handler( void );
+void SVCall_Handler( void ) __attribute__ (( naked ));
 
 /*
  * Start first task is a separate function so it can be tested in isolation.
@@ -200,7 +200,7 @@ portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE
 }
 /*-----------------------------------------------------------*/
 
-void vPortSVCHandler( void )
+void SVCall_Handler( void )
 {
 	__asm volatile (
 					"	ldr	r3, pxCurrentTCBConst2		\n" /* Restore the context. */
@@ -325,7 +325,7 @@ __attribute__(( naked )) void vPortClearInterruptMask( unsigned long ulNewMaskVa
 }
 /*-----------------------------------------------------------*/
 
-void xPortPendSVHandler( void )
+void PendSV_Handler( void )
 {
 	/* This is a naked function. */
 
@@ -371,7 +371,7 @@ void xPortPendSVHandler( void )
 }
 /*-----------------------------------------------------------*/
 
-void xPortSysTickHandler( void )
+void SysTick_Handler( void )
 {
 	/* If using preemption, also force a context switch. */
 	#if configUSE_PREEMPTION == 1

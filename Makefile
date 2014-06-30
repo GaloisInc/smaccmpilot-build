@@ -26,7 +26,9 @@ export CONFIG_PLATFORMS ?= $(PLATFORMS)
 # Important: this should be defined with '=', not ':='.  This is because we may
 # generate ...smacm-mavlink/smaccm-mavlink.cabal (SMAVLINK_CABAL target), so
 # this variable needs to be determined at *use* time.
-ALL_CABAL_PKGS = $(shell find . -name "*.cabal" -exec dirname {} \;)
+ALL_CABAL_PACKAGES = $(shell find . -name "*.cabal" -exec dirname {} \;)
+# Allow the user to override the use of all packages in the cabal-build.
+CABAL_PACKAGES ?= $(ALL_CABAL_PACKAGES)
 
 # Set the DEFAULT_BUILD TARGET, if not already assigned.
 DEFAULT_TARGET ?= smaccmpilot-all
@@ -38,9 +40,9 @@ include mavlink.mk
 smaccmpilot-all: cabal-build c-build
 
 cabal-build: .cabal-sandbox
-	cabal sandbox add-source $(ALL_CABAL_PKGS)
+	cabal sandbox add-source $(ALL_CABAL_PACKAGES)
 	# Make the top-level cabal package.
-	cabal install $(GHC_OPTS) $(EXTRA_FLAGS) $(ALL_CABAL_PKGS)
+	cabal install $(GHC_OPTS) $(EXTRA_FLAGS) $(CABAL_PACKAGES)
 
 .cabal-sandbox: $(MAKEFILE_LIST) $(SMAVLINK_CABAL)
 	cabal sandbox init

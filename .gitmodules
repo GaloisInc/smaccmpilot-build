@@ -22,9 +22,6 @@
 [submodule "mavlink"]
 	path = mavlink
 	url = https://github.com/GaloisInc/mavlink.git
-[submodule "language-c-quote"]
-	path = language-c-quote
-	url = https://github.com/pchickey/language-c-quote
 [submodule "ivory-tower-stm32"]
 	path = ivory-tower-stm32
 	url = https://github.com/GaloisInc/ivory-tower-stm32

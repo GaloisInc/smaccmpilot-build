@@ -1,21 +1,15 @@
 
 # TODO
 
-## Build/OS
-
-- F427 peripherals
-- F103 peripheral drivers
-- CortexM3 support from FreeRTOS & build system
-
 ## Drivers
 
-- fmu 1.7 sensors complete:
-    - mpu6k (spi)
-    - ms5611 (i2c)
-    - hmc5883l (i2c)
+- fix CAN driver, can examples
+- ppm in driver
+- fix copter motor drivers
 
+- F427 peripherals
 - fmu 2.4 sensors
-    - basic platform bringup (build/linker scripts)
+    - basic platform bringup (vector, linker script)
     - todo:
         - power managment: turn on power busses, report faults
         - lsm303d (spi)
@@ -25,15 +19,6 @@
     - untested:
         - mpu6k (spi)
 
-- fmu 2.4 io
-    - basic platform bringup (build/linker scripts)
-    - ivory-bsp-stm32f4 renamed, generalized where possible
-    - gpio
-    - ppm in
-    - pwm out
-    - uart
-    - px4fmu interface
-
 - ms5611 calibration application needs to be written & tested
 
 ## Application code
@@ -42,4 +27,24 @@
     - output sensor readings, ppm
     - send motor outputs from input
 
+- commsec library & unit tests
+
+- mavlink unit tests
+
+- flight subsystem unit tests
+  - sensor fusion only
+  - user input only
+
+# optional / later
+
+- F103 peripheral drivers
+- CortexM3 support from FreeRTOS & build system
+- fmu 2.4 io
+    - basic platform bringup (vector, linker script)
+    - ivory-bsp-stm32 generalized where possible
+    - gpio
+    - ppm in
+    - pwm out
+    - uart
+    - px4fmu interface
 

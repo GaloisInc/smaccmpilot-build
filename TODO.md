@@ -27,8 +27,6 @@
     - output sensor readings, ppm
     - send motor outputs from input
 
-- commsec library & unit tests
-
 - mavlink unit tests
 
 - flight subsystem unit tests

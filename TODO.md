@@ -3,23 +3,11 @@
 
 ## Drivers
 
-- fix CAN driver, can examples
-- ppm in driver
-- fix copter motor drivers
-
-- F427 peripherals
 - fmu 2.4 sensors
-    - basic platform bringup (vector, linker script)
-    - todo:
-        - power managment: turn on power busses, report faults
-        - lsm303d (spi)
-        - lg3d20h (spi) - optional
-        - ms5611  (spi)
-        - px4io interface
-    - untested:
-        - mpu6k (spi)
-
-- ms5611 calibration application needs to be written & tested
+    - power managment: report faults
+    - px4io interface
+    - tri-color led (i2c)
+    - lg3d20h (spi) - optional
 
 ## Application code
 
@@ -29,9 +17,10 @@
 
 - mavlink unit tests
 
-- flight subsystem unit tests
-  - sensor fusion only
-  - user input only
+- flight subsystem moved to tower 9
+    - unit tests
+        - sensor fusion only
+        - user input only
 
 # optional / later
 

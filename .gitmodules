@@ -25,3 +25,6 @@
 [submodule "ivory-tower-stm32"]
 	path = ivory-tower-stm32
 	url = https://github.com/GaloisInc/ivory-tower-stm32
+[submodule "gidl"]
+	path = gidl
+	url = https://github.com/GaloisInc/gidl

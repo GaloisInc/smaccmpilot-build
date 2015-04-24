@@ -31,3 +31,6 @@
 [submodule "s-cargot"]
 	path = s-cargot
 	url = https://github.com/aisamanra/s-cargot
+[submodule "gec"]
+	path = gec
+	url = https://github.com/GaloisInc/gec

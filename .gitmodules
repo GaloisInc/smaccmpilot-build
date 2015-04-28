@@ -16,9 +16,6 @@
 [submodule "smaccmpilot-SiK"]
 	path = smaccmpilot-SiK
 	url = https://github.com/GaloisInc/smaccmpilot-SiK.git
-[submodule "mavlink"]
-	path = mavlink
-	url = https://github.com/GaloisInc/mavlink.git
 [submodule "ivory-tower-stm32"]
 	path = ivory-tower-stm32
 	url = https://github.com/GaloisInc/ivory-tower-stm32

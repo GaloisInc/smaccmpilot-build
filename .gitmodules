@@ -30,5 +30,5 @@
 	url = https://github.com/GaloisInc/gec
 [submodule "tower-camkes-odroid"]
 	path = tower-camkes-odroid
-	url = ./tower-camkes-odroid
+	url = https://github.com/GaloisInc/tower-camkes-odroid
 

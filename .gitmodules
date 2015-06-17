@@ -31,4 +31,6 @@
 [submodule "tower-camkes-odroid"]
 	path = tower-camkes-odroid
 	url = https://github.com/GaloisInc/tower-camkes-odroid
-
+[submodule "ivory-tower-posix"]
+	path = ivory-tower-posix
+	url = https://github.com/GaloisInc/ivory-tower-posix.git

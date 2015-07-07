@@ -7,10 +7,14 @@ Pixhawk, and then relays the response.
 
 ## Setup
 
+We assume you have Haskell build tools (GHC >= 7.8, and cabal). These
+instructions are known to work only on Linux and OSX.
+
 ```
+> cabal update
 > git clone git://github.com/GaloisInc/smaccmpilot-build.git
 > cd smaccmpilot-build
-> cabal update
+> git checkout git checkout origin/feature/tower9
 > git submodule init
 > git submodule update
 > cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight

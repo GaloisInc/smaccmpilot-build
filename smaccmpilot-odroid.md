@@ -1,0 +1,114 @@
+# Integrated build instructions
+
+These instructions are to build the integrated demo, including the camera
+virtual machine and the commsec "proxy" that takes encrypted queries over serial
+from a ground control station, decrypts them, passes them over CAN to the
+Pixhawk, and then relays the response.
+
+## Setup
+
+```
+> git clone git://github.com/GaloisInc/smaccmpilot-build.git
+> cd smaccmpilot-build
+> cabal update
+> git submodule init
+> git submodule update
+> cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
+> make create-sandbox
+```
+
+## Build the ODROID app
+
+We assume you've already DD'ed a microSD card with the Linux filesystem.
+
+```
+> cd smaccmpilot-stm32f4/src/smaccm-flight
+> make smaccmpilot-odroid
+```
+
+This creates a directory, `smaccmpilot`.
+
+```
+> mv smaccmpilot /june-drop-odroid-manifest/apps/smaccmpilot
+```
+
+Make sure you have a file `RAMSES_PATH.mk` in
+`june-drop-odroid-manifest/apps/` containing
+
+```
+RAMSES_PATH=/<ABSOLUTE_PATH>/phase2/ramses-demo
+```
+
+where `phase2` is the repo https://github.com/smaccm/phase2
+
+```
+> cd june-drop-odroid-manifest/apps/smaccmpilot
+> make
+```
+This creates the Camkes components and should be ready for seL4 build.
+
+```
+> cd june-drop-odroid-manifest
+```
+
+Add to the Kconfig the app `smaccmpilot` and the lib `libsmaccmpilot`. Make a
+defconfig. Remember to turn on Camkes read/write caching to cut down on build
+times.
+
+
+## Build the Pixhawk app
+
+```
+> cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
+> make platform-fmu24/can-server-test-gen
+```
+
+This creates a directory `platform-fmu24/can-proxy-test/`
+
+```
+> cd platform-fmu24/can-proxy-test/
+```
+
+Flash the Pixhawk with the file `image`. Follow instructions here:
+http://smaccmpilot.org/hardware/blackmagic.html
+
+## Testing
+
+### Wiring
+
+ * CAN connect Pixhawk and Odroid
+ * Connect the ODROID telem UART to the laptop
+ * Usual cables for ODROID console, booting
+ * Power the Pixhawk via USB
+
+### Running
+
+You should be able to run the camera VM (get instructions from Rockwell
+Collins).
+
+We'll focus here on testing the proxy app:
+
+```
+> cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-comm-client
+> make create-sandbox
+> make
+> ./gcs.sh <serial-device (/dev/ttyXXX)> 115200 —verbose
+```
+
+Where this is the device connected to the ODROID telem. `gcs.sh` is the ground
+control station and will listen to requests over http.
+
+Then in another terminal, run e.g.,
+
+```
+curl http://localhost:8080/controllable_vehicle_i/gyro_output
+```
+
+You should see output like
+
+{"samplefail":false,"time":{"unTimeMicros":322631000},"initfail":false,"temperature":34.224117,”sample
+{"z":-0.9756098,"x":-2.195122,"y":0.42682928}}
+
+(The first query may not succeed---`^C` on curl then try again if so.)
+
+If no output is given in the `curl` terminal, the app is not working.

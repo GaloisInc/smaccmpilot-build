@@ -121,9 +121,29 @@ We'll focus here on testing the proxy app:
 ```
 
 Where this is the device connected to the ODROID telem. `gcs.sh` is the ground
-control station and will listen to requests over http.
+control station and will listen to requests over HTTP.
 
-Then in another terminal, run e.g.,
+Now browse to <http://127.0.0.1:8080/attitude.html>. You should see a 3D
+rendered cube representing the current orientation of your Pixhawk.
+However, it will be mostly static until you complete a calibration
+procedure.
+
+To calibrate the Pixhawk's sensors, pick up the Pixhawk and spin it
+around in every direction you can, including flipping it upside down.
+Then set it down and don't move it for a moment.
+
+If you were thorough enough in your Pixhawk-spinning efforts, you should
+see the cube snap to a new position, and then follow your movements
+faithfully. (Note that each time you power-cycle the Pixhawk, you'll
+have to recalibrate it.)
+
+### Manual status requests
+
+The ground control station web UI makes various requests via a RESTful
+JSON API, and you can issue the same requests by hand for
+troubleshooting.
+
+In a new terminal, run e.g.,
 
 ```
 curl http://localhost:8080/controllable_vehicle_i/gyro_output

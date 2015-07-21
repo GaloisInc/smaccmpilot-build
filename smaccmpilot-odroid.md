@@ -59,12 +59,17 @@ Add to the Kconfig the app `smaccmpilot` and the lib `libsmaccmpilot`. Make a
 defconfig. Remember to turn on Camkes read/write caching to cut down on build
 times.
 
+## Alternative: Build the Pixhawk equivalent of the ODROID app
 
-## Build the Pixhawk app
+You can also run functionally the same code on a Pixhawk, for a
+two-Pixhawk test setup instead of a Pixhawk+ODROID test setup. (This
+version doesn't include the Linux VM, of course, but does support the
+encrypted GCS link and proxying requests over CAN to the server
+Pixhawk.)
 
 ```
 > cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
-> make platform-fmu24/can-server-test-gen
+> make platform-fmu24/can-proxy-test-gen
 ```
 
 This creates a directory `platform-fmu24/can-proxy-test/`
@@ -74,14 +79,30 @@ This creates a directory `platform-fmu24/can-proxy-test/`
 ```
 
 Flash the Pixhawk with the file `image`. Follow instructions here:
-http://smaccmpilot.org/hardware/blackmagic.html
+<http://smaccmpilot.org/hardware/blackmagic.html>
+
+## Build the Pixhawk app
+
+```
+> cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
+> make platform-fmu24/can-server-test-gen
+```
+
+This creates a directory `platform-fmu24/can-server-test/`
+
+```
+> cd platform-fmu24/can-server-test/
+```
+
+Flash the Pixhawk with the file `image`. Follow instructions here:
+<http://smaccmpilot.org/hardware/blackmagic.html>
 
 ## Testing
 
 ### Wiring
 
- * CAN connect Pixhawk and Odroid
- * Connect the ODROID telem UART to the laptop
+ * CAN connect Pixhawk and Odroid (or proxy Pixhawk)
+ * Connect the ODROID telem UART (or proxy Pixhawk's "TELEM 1") to the laptop
  * Usual cables for ODROID console, booting
  * Power the Pixhawk via USB
 

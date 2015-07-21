@@ -16,9 +16,21 @@
 [submodule "smaccmpilot-SiK"]
 	path = smaccmpilot-SiK
 	url = https://github.com/GaloisInc/smaccmpilot-SiK.git
-[submodule "smaccmpilot-gcs-gateway"]
-	path = smaccmpilot-gcs-gateway
-	url = https://github.com/GaloisInc/smaccmpilot-gcs-gateway
-[submodule "mavlink"]
-	path = mavlink
-	url = https://github.com/GaloisInc/mavlink.git
+[submodule "ivory-tower-stm32"]
+	path = ivory-tower-stm32
+	url = https://github.com/GaloisInc/ivory-tower-stm32
+[submodule "gidl"]
+	path = gidl
+	url = https://github.com/GaloisInc/gidl
+[submodule "s-cargot"]
+	path = s-cargot
+	url = https://github.com/aisamanra/s-cargot
+[submodule "gec"]
+	path = gec
+	url = https://github.com/GaloisInc/gec
+[submodule "tower-camkes-odroid"]
+	path = tower-camkes-odroid
+	url = https://github.com/GaloisInc/tower-camkes-odroid
+[submodule "ivory-tower-posix"]
+	path = ivory-tower-posix
+	url = https://github.com/GaloisInc/ivory-tower-posix.git

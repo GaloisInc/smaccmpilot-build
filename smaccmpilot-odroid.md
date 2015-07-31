@@ -117,7 +117,7 @@ We'll focus here on testing the proxy app:
 > cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-comm-client
 > make create-sandbox
 > make
-> ./gcs.sh <serial-device (/dev/ttyXXX)> 115200 —verbose
+> ./gcs.sh <serial-device (/dev/ttyXXX)> 57600 —verbose
 ```
 
 Where this is the device connected to the ODROID telem. `gcs.sh` is the ground

@@ -59,39 +59,17 @@ Add to the Kconfig the app `smaccmpilot` and the lib `libsmaccmpilot`. Make a
 defconfig. Remember to turn on Camkes read/write caching to cut down on build
 times.
 
-## Alternative: Build the Pixhawk equivalent of the ODROID app
-
-You can also run functionally the same code on a Pixhawk, for a
-two-Pixhawk test setup instead of a Pixhawk+ODROID test setup. (This
-version doesn't include the Linux VM, of course, but does support the
-encrypted GCS link and proxying requests over CAN to the server
-Pixhawk.)
-
-```
-> cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
-> make platform-fmu24/can-proxy-test-gen
-```
-
-This creates a directory `platform-fmu24/can-proxy-test/`
-
-```
-> cd platform-fmu24/can-proxy-test/
-```
-
-Flash the Pixhawk with the file `image`. Follow instructions here:
-<http://smaccmpilot.org/hardware/blackmagic.html>
-
 ## Build the Pixhawk app
 
 ```
 > cd smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
-> make platform-fmu24/can-server-test-gen
+> make platform-fmu24/standalone-flight
 ```
 
-This creates a directory `platform-fmu24/can-server-test/`
+This creates a directory `platform-fmu24/standalone-flight/`
 
 ```
-> cd platform-fmu24/can-server-test/
+> cd platform-fmu24/standalone-flight/
 ```
 
 Flash the Pixhawk with the file `image`. Follow instructions here:

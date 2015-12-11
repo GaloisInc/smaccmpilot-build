@@ -1,7 +1,7 @@
 # [SMACCMPilot Build][smaccmpilotbuild]
 
-An umbrella repository which organizes all of the dependencies required to build
-the SMACCMPilot project.
+An umbrella repository which organizes all of the submodules for the SMACCMPilot
+project, and provides a development environment as a Vagrant VM.
 
 ## Information
 
@@ -14,10 +14,10 @@ updates.
 [smaccmpilot.org]: http://smaccmpilot.org
 [list]: http://community.galois.com/mailman/listinfo/smaccmpilot
 
-## Prerequisites
+## Development Environment
 
-A description of required prerequisites [is available on smaccmpilot.org][prereq].
-[prereq]: http://smaccmpilot.org/software/prerequisites.html
+See the `development-environment/` directory to set up a [Vagrant][] virtual
+machine for building the SMACCMPilot codebase.
 
 ## Contents
 

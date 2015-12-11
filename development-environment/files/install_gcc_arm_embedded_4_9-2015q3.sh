@@ -13,7 +13,7 @@ if [[ ! ":$PATH:" == *":$GCC_PATH:"* ]]; then
 	echo "# automatically adding gcc-arm-embedded to PATH:" >> ~/.bashrc
 	echo "PATH=\$PATH:$GCC_PATH" >> ~/.bashrc
 	echo "export PATH" >> ~/.bashrc
-	if [ -f ~/.zsh/site-config ]; then
+	if [ -d ~/.zsh ]; then
 		echo "# AUTOMATICALLY ADDING TO PATH:" >> ~/.zsh/site-config
 		echo "PATH=\$PATH:$GCC_PATH" >> ~/.zsh/site-config
 		echo "export PATH" >> ~/.zsh/site-config

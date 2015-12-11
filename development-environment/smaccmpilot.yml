@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+  - include: tasks/basic_dev_tools.yml
+  - include: tasks/build_smaccmpilot.yml

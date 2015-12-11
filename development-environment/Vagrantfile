@@ -1,0 +1,20 @@
+Vagrant.require_version ">= 1.7.0"
+Vagrant.configure(2) do |config|
+  # Fedora 23 base image:
+  config.vm.box = "fedora/23-cloud-base"
+  # We require 4GB of ram for building some haskell packages.
+  # Providing 2 CPUs is probably possible on any machine with 4GB of ram to
+  # spare. You may want to increase this to make builds faster.
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 4096
+    v.cpus = 2
+  end
+  # Need to install python for ansible to be able to run at all
+  config.vm.provision "shell",
+    inline: "dnf -y install python"
+  # Finally, hand over the rest of provisioning to Ansible.
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "v"
+    ansible.playbook = "smaccmpilot.yml"
+  end
+end

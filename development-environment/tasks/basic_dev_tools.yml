@@ -1,0 +1,81 @@
+- name: Bootstrap python-dnf
+  # This is required to do any of the following steps that use the `dnf:`
+  # Ansible module.
+  sudo: yes
+  raw: dnf -y install python-dnf
+  when: ansible_distribution == 'Fedora'
+
+- name: Update all packages
+  sudo: yes
+  dnf: name=* state=latest
+  when: ansible_distribution == 'Fedora'
+
+- name: Install 'Development tools' package group
+  # We need a native C compiler, make, and a couple of other tools. We could
+  # probably get away with installing a bit less here, if strictly required.
+  sudo: yes
+  dnf: name="@development tools" state=present
+  when: ansible_distribution == 'Fedora'
+
+- name: Install haskell packages
+  sudo: yes
+  dnf: name={{ item }} state=latest
+  when: ansible_distribution == 'Fedora'
+  tags: haskell
+  with_items:
+    # We only support GHC 7.8.x at this time.
+    - ghc-7.8.4
+    # We need F23's cabal 1.18.x to install cabal 1.22.x.
+    - cabal-install
+    # The zlib headers will be required to build cabal 1.22.x
+    - zlib-devel
+
+- name: Update cabal package database
+  # Get the latest package database from Hackage. This will make it possible to
+  # upgrade our cabal installation 
+  sudo: no
+  tags:
+    - haskell
+    - cabal
+  command: cabal update
+
+- name: Install latest cabal, alex, and happy
+  sudo: no
+  tags:
+    - haskell
+    - cabal
+  # We need cabal 1.22.x or greater to build SMACCMPilot.
+  # We also need alex and happy to be installed. At this time, the latest alex
+  # on hackage has a bug with GHC 7.8.x, so we require alex 3.1.4, the last
+  # version before that bug appeared.
+  command: cabal install cabal-install alex-3.1.4 happy
+
+- name: Add cabal bin to path
+  sudo: no
+  tags:
+    - haskell
+    - cabal
+  # The global cabal bin needs to be in the user path so future steps can use
+  # the newly installed cabal 1.22.x, alex, and happy.
+  script: ./add_cabal_bin_to_path.sh
+
+- name: Install arm-gcc-embedded dependencies
+  sudo: yes
+  tags: crosscompiler
+  dnf: name={{ item }} state=present
+  with_items:
+    # arm-gcc-embedded is shipped as 32 bit x86 executables. Fedora does not
+    # ship with a 32 bit glibc, so we need to install it.
+    - glibc.i686
+    # The shell script used in the following step will require wget to fetch
+    # the arm-gcc-embedded tarball from the web.
+    - wget
+
+- name: Install arm-gcc-embedded cross compiler
+  # arm-gcc-embedded is not packaged as an RPM, therefore, we have a custom
+  # script to download it from the web, and add its bin directory to the user
+  # path.
+  sudo: no
+  tags: crosscompiler
+  script: ./install_gcc_arm_embedded_4_9-2015q3.sh
+

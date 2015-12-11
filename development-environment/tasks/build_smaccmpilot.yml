@@ -1,0 +1,35 @@
+- name: Install libev-devel
+  sudo: yes
+  dnf: name=libev-devel state=latest
+  when: ansible_distribution == 'Fedora'
+  tags: build
+
+- name: Clone smaccmpilot-build
+  sudo: no
+  tags: build
+  git:
+    repo: https://github.com/galoisinc/smaccmpilot-build
+    accept_hostkey: yes
+    dest: ~/smaccmpilot-build
+    force: no
+
+- name: Build comm schema sandbox
+  shell: make create-sandbox
+  tags: build
+  args:
+    chdir: ~/smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-comm-schema
+
+- name: Build pixhawk flight sandbox
+  shell: make create-sandbox
+  tags:
+    - build
+  args:
+    chdir: ~/smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
+
+- name: Build pixhawk flight app
+  shell: make flight
+  tags:
+    - build
+    - test
+  args:
+    chdir: ~/smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight

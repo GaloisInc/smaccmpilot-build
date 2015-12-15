@@ -46,6 +46,7 @@ docs-sandbox:
 .PHONY: docs
 docs:
 	$(STANDALONE_HADDOCK) --package-db  $(HADDOCK_PKGDB) -o docs $(PACKAGES)
+	tar -cf docs.tar docs/
 
 clean:
 	-rm cabal.sandbox.config

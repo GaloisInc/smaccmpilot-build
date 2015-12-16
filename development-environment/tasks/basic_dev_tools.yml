@@ -39,7 +39,7 @@
     - cabal
   command: cabal update
 
-- name: Install latest cabal, alex, and happy
+- name: Install latest cabal, alex, happy, and standalone_haddock
   sudo: no
   tags:
     - haskell
@@ -48,7 +48,9 @@
   # We also need alex and happy to be installed. At this time, the latest alex
   # on hackage has a bug with GHC 7.8.x, so we require alex 3.1.4, the last
   # version before that bug appeared.
-  command: cabal install cabal-install alex-3.1.4 happy
+  # standalone-haddock is not required for building SMACCMPilot, but is required
+  # for building the docs
+  command: cabal install cabal-install alex-3.1.4 happy standalone-haddock
 
 - name: Add cabal bin to path
   sudo: no

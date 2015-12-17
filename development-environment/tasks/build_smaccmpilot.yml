@@ -33,3 +33,21 @@
     - test
   args:
     chdir: ~/smaccmpilot-build/smaccmpilot-stm32f4/src/smaccm-flight
+
+- name: Build docs sandbox
+  shell: make docs-sandbox
+  tags:
+    - build
+    - test
+    - docs
+  args:
+    chdir: ~/smaccmpilot-build
+
+- name: Build docs
+  shell: make docs
+  tags:
+    - build
+    - test
+    - docs
+  args:
+    chdir: ~/smaccmpilot-build

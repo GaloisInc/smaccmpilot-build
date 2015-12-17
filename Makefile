@@ -1,6 +1,6 @@
 
 
-STANDALONE_HADDOCK ?= standalone_haddock
+STANDALONE_HADDOCK ?= standalone-haddock
 HADDOCK_PKGDB ?= $(PWD)/.cabal-sandbox/x86_64-linux-ghc-7.8.4-packages.conf.d
 
 PACKAGES:= ivory/ivory \

@@ -34,3 +34,9 @@
 [submodule "smaccmpilot-hardware-prep"]
 	path = smaccmpilot-hardware-prep
 	url = https://github.com/GaloisInc/smaccmpilot-hardware-prep
+[submodule "smaccmpilot-org"]
+	path = smaccmpilot-org
+	url = https://github.com/galoisinc/smaccmpilot-org
+[submodule "ivorylang-org"]
+	path = ivorylang-org
+	url = https://github.com/galoisinc/ivorylang-org

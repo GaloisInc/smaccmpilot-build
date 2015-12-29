@@ -40,13 +40,18 @@ default:
 docs-sandbox:
 	cabal sandbox init
 	echo "documentation: True" >> cabal.sandbox.config
-	cabal sandbox add-source $(PACKAGES)
-	cabal install $(PACKAGES)
+	cabal sandbox add-source $(PACKAGES) ivorylang-org smaccmpilot-org
+	cabal install $(PACKAGES) ivorylang-org smaccmpilot-org
 
 .PHONY: docs
 docs:
 	$(STANDALONE_HADDOCK) --package-db  $(HADDOCK_PKGDB) -o docs $(PACKAGES)
 	tar -cf docs.tar docs/
+	export SMACCMPILOT_ORG_EXEC=$(PWD)/.cabal-sandbox/bin/smaccmpilot-org
+	export IVORYLANG_ORG_EXEC=$(PWD)/.cabal-sandbox/bin/ivorylang-org
+	make -C smaccmpilot-org build
+	make -C ivorylang-org build
+
 
 clean:
 	-rm cabal.sandbox.config

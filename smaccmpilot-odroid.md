@@ -80,7 +80,7 @@ Flash the Pixhawk with the file `image`. Follow instructions here:
 ### Wiring
 
  * CAN connect Pixhawk and Odroid (or proxy Pixhawk)
- * Connect the ODROID telem UART (or proxy Pixhawk's "TELEM 1") to the laptop
+ * Connect the ODROID telem UART (or proxy Pixhawk's "TELEM 1") to the laptop (install [drivers for USB over UART](https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx) if necessary)
  * Usual cables for ODROID console, booting
  * Power the Pixhawk via USB
 

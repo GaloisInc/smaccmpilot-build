@@ -59,6 +59,8 @@ Add to the Kconfig the app `smaccmpilot` and the lib `libsmaccmpilot`. Make a
 defconfig. Remember to turn on Camkes read/write caching to cut down on build
 times.
 
+### TODO: fastboot instructions, including how to get fastboot
+
 ## Build the Pixhawk app
 
 ```

@@ -1,3 +1,6 @@
 .cabal-sandbox
 cabal.sandbox.config
 Config.mk
+.stack-work
+/docs.tar
+/docs/

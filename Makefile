@@ -1,7 +1,4 @@
-
-
-STANDALONE_HADDOCK ?= standalone-haddock
-HADDOCK_PKGDB ?= $(PWD)/.cabal-sandbox/x86_64-linux-ghc-7.8.4-packages.conf.d
+export PATH := $(shell stack path --local-bin-path):$(PATH)
 
 PACKAGES:= ivory/ivory \
 	ivory/ivory-artifact \
@@ -36,24 +33,22 @@ PACKAGES:= ivory/ivory \
 default:
 	make -C smaccmpilot-stm32f4
 
-.PHONY: docs-sandbox
-docs-sandbox:
-	cabal sandbox init
-	echo "documentation: True" >> cabal.sandbox.config
-	cabal sandbox add-source $(PACKAGES) ivorylang-org smaccmpilot-org
-	cabal install $(PACKAGES) ivorylang-org smaccmpilot-org
+DOCS_STACK          ?= stack --stack-yaml $(PWD)/stack-7.10.yaml
+DOCS_BIN_PATH       ?= $(shell $(DOCS_STACK) path --bin-path)
+DOCS_LOCAL_PKGDB    ?= $(shell $(DOCS_STACK) path --local-pkg-db)
+DOCS_SNAPSHOT_PKGDB ?= $(shell $(DOCS_STACK) path --snapshot-pkg-db)
 
 .PHONY: docs
 docs:
-	$(STANDALONE_HADDOCK) --package-db  $(HADDOCK_PKGDB) -o docs $(PACKAGES)
+	$(DOCS_STACK) haddock
+	$(DOCS_STACK) install standalone-haddock
+	(export PATH=$(DOCS_BIN_PATH); \
+	 standalone-haddock --package-db $(LOCAL_PKGDB) \
+			    --package-db $(SNAPSHOT_PKGDB) \
+			    -o docs $(PACKAGES))
 	tar -cf docs.tar docs/
-	export SMACCMPILOT_ORG_EXEC=$(PWD)/.cabal-sandbox/bin/smaccmpilot-org
-	export IVORYLANG_ORG_EXEC=$(PWD)/.cabal-sandbox/bin/ivorylang-org
 	make -C smaccmpilot-org build
 	make -C ivorylang-org build
 
-
 clean:
-	-rm cabal.sandbox.config
-	-rm -rf .cabal-sandbox
-	-rm -rf dist
+	stack clean

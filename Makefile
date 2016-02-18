@@ -33,7 +33,7 @@ PACKAGES:= ivory/ivory \
 default:
 	make -C smaccmpilot-stm32f4
 
-DOCS_STACK          ?= stack --stack-yaml $(PWD)/stack-7.10.yaml
+DOCS_STACK          ?= stack --stack-yaml $(PWD)/stack.yaml
 DOCS_BIN_PATH       ?= $(shell $(DOCS_STACK) path --bin-path)
 DOCS_LOCAL_PKGDB    ?= $(shell $(DOCS_STACK) path --local-pkg-db)
 DOCS_SNAPSHOT_PKGDB ?= $(shell $(DOCS_STACK) path --snapshot-pkg-db)

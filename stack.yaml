@@ -1,7 +1,7 @@
 # For more information, see: http://docs.haskellstack.org/en/stable/yaml_configuration.html
 
 # Specifies the GHC version and set of packages available (e.g., lts-3.5, nightly-2015-09-21, ghc-7.10.2)
-resolver: lts-2.22
+resolver: lts-5.1
 
 # Local packages, usually specified by relative directory name
 packages:
@@ -42,6 +42,11 @@ packages:
 - tower/tower-config/
 - tower/tower-hal/
 - tower-camkes-odroid/
+# estimator with relaxed version bounds; remove when pushed to Hackage
+- location:
+    git: https://github.com/GaloisInc/estimator.git
+    commit: 4818515e8a05d7d9c54e51d7ac7fa21580336366
+  extra-dep: true
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
 extra-deps:
@@ -49,12 +54,16 @@ extra-deps:
   - cipher-aes128-0.7.0.1
   - cpphs-1.19.3
   - curve25519-0.2.2
-  - ed25519-donna-0.1
-  - estimator-1.1.0.1
+  - ed25519-donna-0.1.1
+#  - estimator-1.1.0.2
+  - exception-mtl-0.4
   - ghc-srcspan-plugin-0.2.1.0
+  - language-c-quote-0.11.4
+  - mainland-pretty-0.4.1.2
   - primitive-0.6.1.0
   - s-cargot-0.1.0.0
   - serialport-0.4.7
+  - symbol-0.2.4
 
 # Override default flag values for local packages and extra-deps
 flags: {}

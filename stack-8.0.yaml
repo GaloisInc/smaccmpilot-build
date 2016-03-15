@@ -42,6 +42,8 @@ packages:
 - tower/tower-aadl/
 - tower/tower-config/
 - tower/tower-hal/
+- tower/tower-petri/
+- tower/tower-opts/
 - tower-camkes-odroid/
 # estimator with relaxed version bounds; remove when pushed to Hackage
 - location:

@@ -41,6 +41,8 @@ packages:
 - tower/tower/
 - tower/tower-aadl/
 - tower/tower-config/
+- tower/tower-petri/
+- tower/tower-opts/
 - tower/tower-hal/
 - tower-camkes-odroid/
 

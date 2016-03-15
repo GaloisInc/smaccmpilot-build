@@ -40,6 +40,8 @@ packages:
 - smaccmpilot-stm32f4/src/smaccm-ins/
 - tower/tower/
 - tower/tower-aadl/
+- tower/tower-petri/
+- tower/tower-opts/
 - tower/tower-config/
 - tower/tower-hal/
 - tower-camkes-odroid/

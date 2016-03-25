@@ -24,6 +24,7 @@ packages:
 - ivory-tower-stm32/ivory-bsp-stm32/
 - ivory-tower-stm32/ivory-bsp-tests/
 - ivory-tower-stm32/ivory-freertos-bindings/
+- ivory-tower-stm32/tower-freertos-dummy/
 - ivory-tower-stm32/tower-freertos-stm32/
 - ivory-tower-stm32/tower-freertos-stm32-tests/
 - ivory-tower-stm32/tower-echronos-stm32/

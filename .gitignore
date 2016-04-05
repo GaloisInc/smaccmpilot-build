@@ -1,4 +1,5 @@
 .cabal-sandbox
+.DS_Store
 cabal.sandbox.config
 Config.mk
 .stack-work

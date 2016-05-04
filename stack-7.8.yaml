@@ -20,7 +20,8 @@ packages:
 - ivory/ivory-stdlib/
 #- ivory-rtverification/rtv-example/
 #- ivory-rtverification/rtv-lib/
-- ivory-tower-posix/
+- ivory-tower-posix/tower-posix/
+- ivory-tower-posix/tower-posix-tests/
 - ivory-tower-stm32/ivory-bsp-stm32/
 - ivory-tower-stm32/ivory-bsp-tests/
 - ivory-tower-stm32/ivory-freertos-bindings/

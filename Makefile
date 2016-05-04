@@ -14,7 +14,8 @@ PACKAGES:= ivory/ivory \
 	tower/tower-aadl \
 	tower/tower-config \
 	tower/tower-hal \
-	ivory-tower-posix \
+	ivory-tower-posix/tower-posix \
+    ivory-tower-posix/tower-posix-tests \
 	tower-camkes-odroid \
 	ivory-tower-stm32/ivory-bsp-stm32 \
 	ivory-tower-stm32/ivory-bsp-tests \

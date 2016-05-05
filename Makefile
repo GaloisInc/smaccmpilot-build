@@ -14,6 +14,7 @@ PACKAGES:= ivory/ivory \
 	tower/tower-aadl \
 	tower/tower-config \
 	tower/tower-hal \
+	tower/tower-opts \
 	ivory-tower-posix/tower-posix \
     ivory-tower-posix/tower-posix-tests \
 	tower-camkes-odroid \

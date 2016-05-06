@@ -22,6 +22,7 @@ packages:
 #- ivory-rtverification/rtv-lib/
 - ivory-tower-posix/tower-posix/
 - ivory-tower-posix/tower-posix-tests/
+- ivory-tower-posix/ivory-bsp-posix/
 - ivory-tower-stm32/ivory-bsp-stm32/
 - ivory-tower-stm32/ivory-bsp-tests/
 - ivory-tower-stm32/ivory-freertos-bindings/

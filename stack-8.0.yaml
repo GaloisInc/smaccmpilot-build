@@ -44,11 +44,6 @@ packages:
 - tower/tower-hal/
 - tower/tower-mini/
 - tower-camkes-odroid/
-# estimator with relaxed version bounds; remove when pushed to Hackage
-- location:
-    git: https://github.com/GaloisInc/estimator.git
-    commit: 4818515e8a05d7d9c54e51d7ac7fa21580336366
-  extra-dep: true
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
 extra-deps:
@@ -74,7 +69,7 @@ extra-deps:
   - snap-server-0.9.5.1
   - symbol-0.2.4
   - zlib-enum-0.2.3.1
-#  - estimator-1.1.0.2
+  - estimator-1.2.0.0
 #  - exception-mtl-0.4
 
 # Override default flag values for local packages and extra-deps

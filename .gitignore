@@ -4,3 +4,5 @@ Config.mk
 .stack-work
 /docs.tar
 /docs/
+/dist-newstyle
+/cabal.project.local

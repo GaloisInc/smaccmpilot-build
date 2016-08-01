@@ -1,7 +1,7 @@
 # For more information, see: http://docs.haskellstack.org/en/stable/yaml_configuration.html
 
 # Specifies the GHC version and set of packages available (e.g., lts-3.5, nightly-2015-09-21, ghc-7.10.2)
-resolver: lts-6.3
+resolver: lts-6.10
 
 # Local packages, usually specified by relative directory name
 packages:
@@ -47,20 +47,10 @@ packages:
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
 extra-deps:
-  - base-compat-0.9.0
-  - cipher-aes128-0.7.0.1
-  - cpphs-1.19.3
   - curve25519-0.2.2
   - ed25519-donna-0.1.1
   - estimator-1.2.0.0
-  - exception-mtl-0.4
-  - ghc-srcspan-plugin-0.2.1.0
-  - language-c-quote-0.11.6
-  - mainland-pretty-0.4.1.4
-  - primitive-0.6.1.0
-  - s-cargot-0.1.0.0
-  - serialport-0.4.7
-  - symbol-0.2.4
+  - s-cargot-0.1.1.1
 
 # Override default flag values for local packages and extra-deps
 flags: {}

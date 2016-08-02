@@ -53,6 +53,8 @@ extra-deps:
   - ed25519-donna-0.1
   - estimator-1.1.0.1
   - ghc-srcspan-plugin-0.2.1.0
+  - language-c-quote-0.11.6
+  - mainland-pretty-0.4.1.4
   - primitive-0.6.1.0
   - s-cargot-0.1.0.0
   - serialport-0.4.7

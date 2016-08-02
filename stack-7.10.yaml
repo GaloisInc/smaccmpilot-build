@@ -1,7 +1,7 @@
 # For more information, see: http://docs.haskellstack.org/en/stable/yaml_configuration.html
 
 # Specifies the GHC version and set of packages available (e.g., lts-3.5, nightly-2015-09-21, ghc-7.10.2)
-resolver: nightly-2016-07-31
+resolver: lts-6.10
 
 # Local packages, usually specified by relative directory name
 packages:
@@ -44,19 +44,6 @@ packages:
 - tower/tower-hal/
 - tower/tower-mini/
 - tower-camkes-odroid/
-# Remove these when Snap 1.0 is released
-- location:
-    git: https://github.com/snapframework/snap-server.git
-    commit: 6977049674f406944d325b1575d7e2b588da7c92
-  extra-dep: true
-- location:
-    git: https://github.com/snapframework/snap-core.git
-    commit: 3f49a1662cad466861b5ec4b1e88812328d26b1b
-  extra-dep: true
-- location:
-    git: https://github.com/snapframework/io-streams-haproxy.git
-    commit: ee84473f6fe3a6049a40ea4156277efcfde37603
-  extra-dep: true
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
 extra-deps:
@@ -64,15 +51,17 @@ extra-deps:
   - ed25519-donna-0.1.1
   - estimator-1.2.0.0
   - s-cargot-0.1.1.1
-  - serialport-0.4.7
-
-allow-newer: true
 
 # Override default flag values for local packages and extra-deps
 flags: {}
 
 # Extra package databases containing global packages
 extra-package-dbs: []
+
+install-ghc: true
+
+# Control whether we use the GHC we find on the path
+# system-ghc: true
 
 # Require a specific version of stack, using version ranges
 # require-stack-version: -any # Default

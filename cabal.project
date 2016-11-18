@@ -1,0 +1,41 @@
+packages: 
+  ./gec/gec.cabal
+  ./gidl/gidl.cabal
+  ./ivory/ivory/ivory.cabal
+  ./ivory/ivory-artifact/ivory-artifact.cabal
+  -- ./ivory/ivory-backend-acl2/ivory-backend-acl2.cabal
+  ./ivory/ivory-backend-c/ivory-backend-c.cabal
+  ./ivory/ivory-eval/ivory-eval.cabal
+  ./ivory/ivory-examples/ivory-examples.cabal
+  ./ivory/ivory-hw/ivory-hw.cabal
+  ./ivory/ivory-model-check/ivory-model-check.cabal
+  ./ivory/ivory-opts/ivory-opts.cabal
+  ./ivory/ivory-quickcheck/ivory-quickcheck.cabal
+  ./ivory/ivory-serialize/ivory-serialize.cabal
+  ./ivory/ivory-stdlib/ivory-stdlib.cabal
+  -- ./ivory-rtverification/rtv-example/rtv-example.cabal
+  -- ./ivory-rtverification/rtv-lib/rtv-lib.cabal
+  ./ivory-tower-posix/ivory-tower-posix.cabal
+  ./ivory-tower-stm32/ivory-bsp-stm32/ivory-bsp-stm32.cabal
+  ./ivory-tower-stm32/ivory-bsp-tests/ivory-bsp-tests.cabal
+  ./ivory-tower-stm32/ivory-freertos-bindings/ivory-freertos-bindings.cabal
+  ./ivory-tower-stm32/tower-echronos-stm32/tower-echronos-stm32.cabal
+  ./ivory-tower-stm32/tower-freertos-stm32/tower-freertos-stm32.cabal
+  ./ivory-tower-stm32/tower-freertos-stm32-tests/tower-freertos-stm32-tests.cabal
+  -- ./ivorylang-org/ivorylang-org.cabal
+  -- ./smaccmpilot-org/smaccmpilot-org.cabal
+  ./smaccmpilot-stm32f4/src/ivory-geo/ivory-geo.cabal
+  ./smaccmpilot-stm32f4/src/ivory-px4-hw/ivory-px4-hw.cabal
+  ./smaccmpilot-stm32f4/src/smaccm-comm-client/smaccm-comm-client.cabal
+  ./smaccmpilot-stm32f4/src/smaccm-comm-schema/smaccm-comm-schema-native/smaccm-comm-schema-native.cabal
+  ./smaccmpilot-stm32f4/src/smaccm-comm-schema/smaccm-comm-schema-tower/smaccm-comm-schema-tower.cabal
+  ./smaccmpilot-stm32f4/src/smaccm-commsec/smaccm-commsec.cabal
+  ./smaccmpilot-stm32f4/src/smaccm-datalink/smaccm-datalink.cabal
+  ./smaccmpilot-stm32f4/src/smaccm-flight/smaccm-flight.cabal
+  ./smaccmpilot-stm32f4/src/smaccm-ins/smaccm-ins.cabal
+  ./tower/tower/tower.cabal
+  ./tower/tower-aadl/tower-aadl.cabal
+  ./tower/tower-config/tower-config.cabal
+  ./tower/tower-hal/tower-hal.cabal
+  ./tower/tower-mini/tower-mini.cabal
+  ./tower-camkes-odroid/tower-camkes-odroid.cabal

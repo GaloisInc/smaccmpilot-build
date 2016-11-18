@@ -40,3 +40,6 @@
 [submodule "ivorylang-org"]
 	path = ivorylang-org
 	url = https://github.com/galoisinc/ivorylang-org
+[submodule "echronos"]
+	path = echronos
+	url = https://github.com/galoisinc/echronos

@@ -47,17 +47,31 @@ packages:
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
 extra-deps:
   - base-compat-0.9.0
+  - base-orphans-0.5.4
+  - bifunctors-5.2
   - cipher-aes128-0.7.0.1
   - cpphs-1.19.3
   - curve25519-0.2.2
   - ed25519-donna-0.1
-  - estimator-1.1.0.1
+  - ed25519-donna-0.1
+  - estimator-1.2.0.0
+  - free-4.12.4
   - ghc-srcspan-plugin-0.2.1.0
+  - haskeline-0.7.3.0
   - language-c-quote-0.11.6
+  - lens-4.13
+  - linear-1.20.5
   - mainland-pretty-0.4.1.4
+  - mtl-2.2.1
   - primitive-0.6.1.0
+  - profunctors-5.2
+  - reflection-2.1.2
   - s-cargot-0.1.0.0
+  - semigroupoids-5.0.1
   - serialport-0.4.7
+  - transformers-0.4.2.0
+  - transformers-compat-0.4.0.4
+  - vector-0.11.0.0
 
 # Override default flag values for local packages and extra-deps
 flags: {}

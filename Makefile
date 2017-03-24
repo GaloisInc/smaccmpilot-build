@@ -27,8 +27,7 @@ PACKAGES:= ivory/ivory \
 	smaccmpilot-stm32f4/src/smaccm-comm-schema/smaccm-comm-schema-tower \
 	smaccmpilot-stm32f4/src/smaccm-commsec \
 	smaccmpilot-stm32f4/src/smaccm-datalink \
-	smaccmpilot-stm32f4/src/smaccm-flight \
-	smaccmpilot-stm32f4/src/smaccm-ins
+	smaccmpilot-stm32f4/src/smaccm-flight
 
 default:
 	make -C smaccmpilot-stm32f4

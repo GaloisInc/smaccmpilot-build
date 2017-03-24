@@ -37,7 +37,6 @@ packages:
 - smaccmpilot-stm32f4/src/smaccm-commsec/
 - smaccmpilot-stm32f4/src/smaccm-datalink/
 - smaccmpilot-stm32f4/src/smaccm-flight/
-- smaccmpilot-stm32f4/src/smaccm-ins/
 - tower/tower/
 - tower/tower-aadl/
 - tower/tower-config/
